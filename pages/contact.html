@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact me - Get in touch for projects and collaborations">
+    <title>Contact - Your Name</title>
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Your Name</div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Get In Touch</h1>
+            <p>Let's discuss your project and how I can help</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-content">
+        <div class="container">
+            <div class="contact-layout">
+                <!-- Contact Information -->
+                <div class="contact-info-section">
+                    <h2>Contact Information</h2>
+                    <p>Feel free to reach out to me through any of the following channels. I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.</p>
+                    
+                    <div class="contact-info-grid">
+                        <div class="contact-info-item">
+                            <div class="contact-icon">📧</div>
+                            <h3>Email</h3>
+                            <a href="mailto:your.email@example.com">your.email@example.com</a>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-icon">📱</div>
+                            <h3>Phone</h3>
+                            <a href="tel:+6281234567890">+62 812-3456-7890</a>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-icon">📍</div>
+                            <h3>Location</h3>
+                            <p>Jakarta, Indonesia</p>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-icon">🌐</div>
+                            <h3>Website</h3>
+                            <a href="https://yourwebsite.com" target="_blank">yourwebsite.com</a>
+                        </div>
+                    </div>
+
+                    <!-- Social Media Links -->
+                    <div class="social-media-section">
+                        <h3>Connect on Social Media</h3>
+                        <div class="social-links-large">
+                            <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" class="social-link">
+                                <span class="social-icon">💻</span>
+                                <span class="social-name">GitHub</span>
+                            </a>
+                            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" class="social-link">
+                                <span class="social-icon">💼</span>
+                                <span class="social-name">LinkedIn</span>
+                            </a>
+                            <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" class="social-link">
+                                <span class="social-icon">🐦</span>
+                                <span class="social-name">Twitter</span>
+                            </a>
+                            <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" class="social-link">
+                                <span class="social-icon">📷</span>
+                                <span class="social-name">Instagram</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Availability Section -->
+                    <div class="availability-section">
+                        <h3>Availability</h3>
+                        <div class="availability-status">
+                            <span class="status-indicator available"></span>
+                            <span class="status-text">Currently available for freelance projects</span>
+                        </div>
+                        <p>Response time: Usually within 24 hours</p>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-section">
+                    <h2>Send a Message</h2>
+                    <p>Have a question or want to work together? Fill out the form below and I'll get back to you as soon as possible.</p>
+                    
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Full Name <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" placeholder="John Doe" required>
+                                <span class="error-message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+62 812-3456-7890">
+                                <span class="error-message"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject">Subject <span class="required">*</span></label>
+                                <input type="text" id="subject" name="subject" placeholder="Project Inquiry" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="projectType">Project Type</label>
+                            <select id="projectType" name="projectType">
+                                <option value="">Select project type</option>
+                                <option value="website">Website Development</option>
+                                <option value="webapp">Web Application</option>
+                                <option value="mobile">Mobile App</option>
+                                <option value="design">UI/UX Design</option>
+                                <option value="consulting">Consulting</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget">Budget Range</label>
+                            <select id="budget" name="budget">
+                                <option value="">Select budget range</option>
+                                <option value="small">< $5,000</option>
+                                <option value="medium">$5,000 - $15,000</option>
+                                <option value="large">$15,000 - $50,000</option>
+                                <option value="enterprise">> $50,000</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="6" placeholder="Tell me about your project..." required></textarea>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="subscribe" id="subscribe">
+                                <span>Subscribe to my newsletter for web development tips and updates</span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large">
+                            Send Message
+                        </button>
+
+                        <div id="formSuccess" class="form-message success" style="display: none;">
+                            ✓ Thank you! Your message has been sent successfully. I'll get back to you soon.
+                        </div>
+
+                        <div id="formError" class="form-message error" style="display: none;">
+                            ✗ Oops! Something went wrong. Please try again.
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>What services do you offer?</h3>
+                        <p>I specialize in web development, including frontend and backend development, UI/UX design, and responsive website creation. I also offer consulting services for technical projects.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>How long does a typical project take?</h3>
+                        <p>Project timelines vary depending on scope and complexity. A simple website might take 2-4 weeks, while a complex web application could take 2-3 months or more. I'll provide a detailed timeline after discussing your requirements.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Do you work with clients remotely?</h3>
+                        <p>Yes! I work with clients from all over the world. I'm experienced in remote collaboration and use tools like Slack, Zoom, and project management software to ensure smooth communication.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>What is your development process?</h3>
+                        <p>I follow an agile approach: discovery and planning, design and prototyping, development and testing, deployment, and ongoing support. You'll be involved throughout the process with regular updates.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Do you provide ongoing support?</h3>
+                        <p>Yes, I offer maintenance and support packages for all projects. This includes bug fixes, updates, and minor modifications to ensure your website continues to run smoothly.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>What are your payment terms?</h3>
+                        <p>I typically work with a 50% upfront payment to begin the project and 50% upon completion. For larger projects, we can arrange milestone-based payments. Payment methods include bank transfer and PayPal.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2>Ready to Start Your Project?</h2>
+                    <p>Let's create something amazing together. I'm excited to hear about your ideas!</p>
+                    <a href="mailto:your.email@example.com" class="btn btn-primary btn-large">Email Me Directly</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Your Name</h3>
+                    <p>Web Developer & Designer passionate about creating beautiful digital experiences.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Your Name. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Files -->
+    <script src="../assets/js/navigation.js"></script>
+    <script src="../assets/js/form-validation.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
