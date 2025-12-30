@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Fitur Modern JavaScript yang Harus Anda Ketahui">
+    <title>Fitur Modern JavaScript - Blog</title>
+    
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Your Name</div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <article class="article-page">
+        <div class="container">
+            <header class="article-header">
+                <div class="article-meta">
+                    <span class="article-category">JavaScript</span>
+                    <span class="article-date">December 15, 2024</span>
+                    <span class="article-read-time">10 Menit Membaca</span>
+                </div>
+                <h1>Fitur Modern JavaScript yang Harus Anda Ketahui</h1>
+                <p class="article-subtitle">Eksplorasi fitur-fitur ES6+ yang membuat kode Anda lebih efisien dan readable</p>
+            </header>
+
+            <div class="article-image">
+                <img src="../assets/images/blog3.jpg" alt="Modern JavaScript Features">
+            </div>
+
+            <div class="article-content">
+                <h2>Pengantar</h2>
+                <p>JavaScript telah berkembang pesat dalam beberapa tahun terakhir. Sejak ES6 (ECMAScript 2015), setiap tahun ada fitur-fitur baru yang powerful dan membuat kode kita lebih clean, readable, dan maintainable. Mari kita eksplor fitur-fitur modern JavaScript yang wajib Anda kuasai.</p>
+
+                <h2>1. Let dan Const</h2>
+                <p>Lupakan <code>var</code>! Gunakan <code>let</code> dan <code>const</code> untuk variable declaration yang lebih aman.</p>
+
+                <pre><code>// Gunakan const untuk nilai yang tidak berubah
+const API_URL = 'https://api.example.com';
+const MAX_USERS = 100;
+
+// Gunakan let untuk nilai yang akan berubah
+let counter = 0;
+let userName = 'John';
+
+// const untuk objects dan arrays (isi bisa diubah)
+const user = { name: 'Alice' };
+user.name = 'Bob'; // OK
+user.age = 25;     // OK
+
+const numbers = [1, 2, 3];
+numbers.push(4); // OK</code></pre>
+
+                <h2>2. Arrow Functions</h2>
+                <p>Syntax yang lebih concise dan tidak mem-bind <code>this</code>.</p>
+
+                <pre><code>// Function biasa
+function add(a, b) {
+    return a + b;
+}
+
+// Arrow function
+const add = (a, b) => a + b;
+
+// Dengan block
+const multiply = (a, b) => {
+    const result = a * b;
+    return result;
+};
+
+// Array methods dengan arrow functions
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map(n => n * 2);
+const evens = numbers.filter(n => n % 2 === 0);</code></pre>
+
+                <h2>3. Template Literals</h2>
+                <p>String interpolation yang lebih powerful dengan backticks.</p>
+
+                <pre><code>const name = 'Alice';
+const age = 25;
+
+// Old way
+const message = 'Hello, my name is ' + name + ' and I am ' + age + ' years old.';
+
+// Modern way
+const message = `Hello, my name is ${name} and I am ${age} years old.`;
+
+// Multi-line strings
+const html = `
+    &lt;div class="card"&gt;
+        &lt;h2&gt;${name}&lt;/h2&gt;
+        &lt;p&gt;Age: ${age}&lt;/p&gt;
+    &lt;/div&gt;
+`;
+
+// Expression dalam template
+const price = 100;
+const discount = 20;
+console.log(`Total: $${price - discount}`);</code></pre>
+
+                <h2>4. Destructuring</h2>
+                <p>Extract values dari objects dan arrays dengan mudah.</p>
+
+                <pre><code>// Object destructuring
+const user = { name: 'Alice', age: 25, city: 'Jakarta' };
+const { name, age } = user;
+
+// Dengan default values
+const { country = 'Indonesia' } = user;
+
+// Rename variables
+const { name: userName, age: userAge } = user;
+
+// Array destructuring
+const colors = ['red', 'green', 'blue'];
+const [primary, secondary] = colors;
+
+// Skip elements
+const [first, , third] = colors;
+
+// Rest operator
+const [head, ...tail] = colors;
+
+// Function parameters
+function greet({ name, age }) {
+    console.log(`Hello ${name}, you are ${age} years old`);
+}
+greet(user);</code></pre>
+
+                <h2>5. Spread Operator</h2>
+                <p>Copy dan merge objects/arrays dengan mudah.</p>
+
+                <pre><code>// Array spread
+const arr1 = [1, 2, 3];
+const arr2 = [4, 5, 6];
+const combined = [...arr1, ...arr2]; // [1, 2, 3, 4, 5, 6]
+
+// Copy array
+const original = [1, 2, 3];
+const copy = [...original];
+
+// Object spread
+const user = { name: 'Alice', age: 25 };
+const updatedUser = { ...user, city: 'Jakarta' };
+
+// Merge objects
+const defaults = { theme: 'dark', lang: 'en' };
+const userSettings = { lang: 'id' };
+const settings = { ...defaults, ...userSettings };</code></pre>
+
+                <h2>6. Optional Chaining (?. )</h2>
+                <p>Akses nested properties tanpa risiko error.</p>
+
+                <pre><code>// Tanpa optional chaining
+const city = user && user.address && user.address.city;
+
+// Dengan optional chaining
+const city = user?.address?.city;
+
+// Dengan array
+const firstItem = items?.[0];
+
+// Dengan function calls
+const result = obj.method?.();
+
+// Real-world example
+const userName = response?.data?.user?.name ?? 'Guest';</code></pre>
+
+                <h2>7. Nullish Coalescing (??)</h2>
+                <p>Alternatif yang lebih baik dari <code>||</code> untuk default values.</p>
+
+                <pre><code>// Problem dengan ||
+const count = 0;
+const value1 = count || 10; // 10 (salah!)
+
+// Solution dengan ??
+const value2 = count ?? 10; // 0 (benar!)
+
+// Use cases
+const userName = user.name ?? 'Guest';
+const config = savedConfig ?? defaultConfig;
+
+// Combine dengan optional chaining
+const theme = settings?.theme ?? 'light';</code></pre>
+
+                <h2>8. Async/Await</h2>
+                <p>Handle asynchronous code dengan cara yang lebih readable.</p>
+
+                <pre><code>// Dengan Promises
+function fetchUser() {
+    return fetch('/api/user')
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(error => console.error(error));
+}
+
+// Dengan async/await
+async function fetchUser() {
+    try {
+        const response = await fetch('/api/user');
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+// Multiple awaits
+async function loadData() {
+    const user = await fetchUser();
+    const posts = await fetchPosts(user.id);
+    const comments = await fetchComments(posts[0].id);
+    return { user, posts, comments };
+}
+
+// Parallel requests
+async function loadAllData() {
+    const [users, posts, comments] = await Promise.all([
+        fetchUsers(),
+        fetchPosts(),
+        fetchComments()
+    ]);
+    return { users, posts, comments };
+}</code></pre>
+
+                <h2>9. Array Methods Modern</h2>
+                <p>Methods yang membuat array manipulation lebih mudah.</p>
+
+                <pre><code>const numbers = [1, 2, 3, 4, 5];
+
+// map - transform setiap element
+const doubled = numbers.map(n => n * 2);
+
+// filter - filter elements
+const evens = numbers.filter(n => n % 2 === 0);
+
+// reduce - aggregate values
+const sum = numbers.reduce((acc, n) => acc + n, 0);
+
+// find - cari element pertama
+const found = numbers.find(n => n > 3);
+
+// some - cek apakah ada element yang match
+const hasEven = numbers.some(n => n % 2 === 0);
+
+// every - cek apakah semua element match
+const allPositive = numbers.every(n => n > 0);
+
+// includes - cek keberadaan element
+const hasThree = numbers.includes(3);
+
+// flat - flatten nested arrays
+const nested = [1, [2, 3], [4, [5]]];
+const flat = nested.flat(2); // [1, 2, 3, 4, 5]
+
+// flatMap - map + flat
+const words = ['hello world', 'how are you'];
+const allWords = words.flatMap(s => s.split(' '));</code></pre>
+
+                <h2>10. Modules (Import/Export)</h2>
+                <p>Organize kode Anda dengan module system.</p>
+
+                <pre><code>// utils.js - Export
+export const add = (a, b) => a + b;
+export const multiply = (a, b) => a * b;
+
+export default function calculator() {
+    // ...
+}
+
+// app.js - Import
+import calculator, { add, multiply } from './utils.js';
+
+// Import semua
+import * as utils from './utils.js';
+utils.add(2, 3);
+
+// Rename imports
+import { add as sum } from './utils.js';
+
+// Dynamic import
+const module = await import('./utils.js');</code></pre>
+
+                <h2>Tips Best Practices</h2>
+                <div class="highlight-box">
+                    <p><strong>💡 Pro Tips:</strong></p>
+                    <ul>
+                        <li>Gunakan <code>const</code> by default, <code>let</code> only when needed</li>
+                        <li>Prefer arrow functions untuk callbacks dan methods</li>
+                        <li>Gunakan destructuring untuk cleaner code</li>
+                        <li>Optional chaining sangat berguna untuk API responses</li>
+                        <li>Async/await lebih readable daripada promises chains</li>
+                        <li>Array methods lebih expressive daripada loops</li>
+                    </ul>
+                </div>
+
+                <h2>Kesimpulan</h2>
+                <p>Fitur-fitur modern JavaScript ini sangat powerful dan membuat kode Anda lebih clean, maintainable, dan efficient. Mulai gunakan fitur-fitur ini dalam project Anda dan lihat bagaimana mereka meningkatkan productivity dan kualitas kode Anda.</p>
+
+                <p>Remember: Practice makes perfect. Cobalah setiap fitur ini dalam project nyata untuk benar-benar memahaminya!</p>
+
+                <div class="article-tags">
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">ES6</span>
+                    <span class="tag">ES2015+</span>
+                    <span class="tag">Modern JS</span>
+                    <span class="tag">Programming</span>
+                </div>
+
+                <div class="article-share">
+                    <h3>Bagikan Artikel:</h3>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn twitter">Twitter</a>
+                        <a href="#" class="share-btn facebook">Facebook</a>
+                        <a href="#" class="share-btn linkedin">LinkedIn</a>
+                        <a href="#" class="share-btn whatsapp">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="author-bio">
+                <div class="author-image">
+                    <img src="../assets/images/profile/profile.jpg" alt="Author">
+                </div>
+                <div class="author-info">
+                    <h3>Tentang Penulis</h3>
+                    <h4>Your Name</h4>
+                    <p>Web Developer dengan pengalaman 5+ tahun dalam membangun aplikasi web modern. Passionate tentang berbagi pengetahuan dan membantu developer pemula memulai karir mereka.</p>
+                    <div class="author-social">
+                        <a href="#">Twitter</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <section class="related-articles">
+                <h2>Artikel Terkait</h2>
+                <div class="articles-grid">
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog5.jpg" alt="React Hooks">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">React</span>
+                            <h3><a href="artikel5.html">Mastering React Hooks</a></h3>
+                            <p>Panduan lengkap tentang React Hooks...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog1.jpg" alt="Web Development">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">Tutorial</span>
+                            <h3><a href="artikel1.html">Mulai Mengembangkan Web</a></h3>
+                            <p>Panduan untuk memulai karir sebagai web developer...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog6.jpg" alt="Performance">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">Performance</span>
+                            <h3><a href="artikel6.html">Optimasi Performa Web</a></h3>
+                            <p>Tips untuk membuat website yang cepat...</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <div class="back-to-blog">
+                <a href="blog.html" class="btn btn-secondary">← Kembali ke Blog</a>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Your Name</h3>
+                    <p>Web Developer & Designer passionate about creating beautiful digital experiences.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#">GitHub</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Your Name. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/navigation.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
