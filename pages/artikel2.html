@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CSS Grid vs Flexbox: Kapan Menggunakan Masing-Masing">
+    <title>CSS Grid vs Flexbox - Blog</title>
+    
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Your Name</div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <article class="article-page">
+        <div class="container">
+            <header class="article-header">
+                <div class="article-meta">
+                    <span class="article-category">CSS</span>
+                    <span class="article-date">December 20, 2025</span>
+                    <span class="article-read-time">8 Menit Membaca</span>
+                </div>
+                <h1>CSS Grid vs Flexbox: Kapan Menggunakan Masing-Masing</h1>
+                <p class="article-subtitle">Memahami perbedaan dan use case yang tepat untuk setiap layout system</p>
+            </header>
+
+            <div class="article-image">
+                <img src="../assets/images/blog2.jpg" alt="CSS Grid vs Flexbox">
+            </div>
+
+            <div class="article-content">
+                <h2>Pengantar</h2>
+                <p>CSS Grid dan Flexbox adalah dua sistem layout paling powerful dalam CSS modern. Keduanya sangat berguna, tetapi dirancang untuk tujuan yang berbeda. Memahami kapan menggunakan masing-masing adalah kunci untuk membuat layout yang efisien dan mudah dipelihara.</p>
+
+                <h2>Apa itu Flexbox?</h2>
+                <p>Flexbox (Flexible Box Layout) adalah sistem layout satu dimensi yang dirancang untuk mendistribusikan ruang dan menyelaraskan item dalam container. Flexbox sangat cocok untuk layout dalam satu arah - baik horizontal (row) atau vertikal (column).</p>
+
+                <h3>Kapan Menggunakan Flexbox:</h3>
+                <ul>
+                    <li><strong>Navigation bars:</strong> Menu horizontal yang responsif</li>
+                    <li><strong>Card layouts:</strong> Ketika Anda ingin item memiliki ukuran fleksibel</li>
+                    <li><strong>Centering content:</strong> Vertical dan horizontal centering</li>
+                    <li><strong>Form controls:</strong> Input dan button yang sejajar</li>
+                    <li><strong>Small-scale layouts:</strong> Komponen UI kecil</li>
+                </ul>
+
+                <h3>Contoh Kode Flexbox:</h3>
+                <pre><code>.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.card {
+    flex: 1 1 300px;
+}</code></pre>
+
+                <h2>Apa itu CSS Grid?</h2>
+                <p>CSS Grid adalah sistem layout dua dimensi yang memungkinkan Anda mengontrol baris dan kolom secara bersamaan. Grid sangat powerful untuk membuat layout halaman yang kompleks dengan presisi tinggi.</p>
+
+                <h3>Kapan Menggunakan CSS Grid:</h3>
+                <ul>
+                    <li><strong>Page layouts:</strong> Layout halaman keseluruhan (header, sidebar, content, footer)</li>
+                    <li><strong>Complex layouts:</strong> Layout dengan banyak baris dan kolom</li>
+                    <li><strong>Gallery grids:</strong> Photo galleries dengan ukuran konsisten</li>
+                    <li><strong>Dashboard layouts:</strong> Widget dan panel yang terstruktur</li>
+                    <li><strong>Magazine-style layouts:</strong> Layout editorial yang kompleks</li>
+                </ul>
+
+                <h3>Contoh Kode CSS Grid:</h3>
+                <pre><code>.page-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "header header"
+        "sidebar content"
+        "footer footer";
+    gap: 1rem;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 200px;
+    gap: 1.5rem;
+}</code></pre>
+
+                <h2>Perbandingan Langsung</h2>
+                
+                <div class="comparison-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aspek</th>
+                                <th>Flexbox</th>
+                                <th>CSS Grid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dimensi</td>
+                                <td>1D (row atau column)</td>
+                                <td>2D (row dan column)</td>
+                            </tr>
+                            <tr>
+                                <td>Best For</td>
+                                <td>Komponen kecil</td>
+                                <td>Layout halaman besar</td>
+                            </tr>
+                            <tr>
+                                <td>Content Flow</td>
+                                <td>Content-first</td>
+                                <td>Layout-first</td>
+                            </tr>
+                            <tr>
+                                <td>Browser Support</td>
+                                <td>Excellent</td>
+                                <td>Excellent (modern)</td>
+                            </tr>
+                            <tr>
+                                <td>Complexity</td>
+                                <td>Lebih sederhana</td>
+                                <td>Lebih kompleks</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2>Mengombinasikan Grid dan Flexbox</h2>
+                <p>Dalam praktiknya, Anda sering menggunakan keduanya bersama-sama. Gunakan Grid untuk layout utama dan Flexbox untuk komponen di dalamnya.</p>
+
+                <h3>Contoh Kombinasi:</h3>
+                <pre><code>/* Grid untuk layout halaman */
+.page {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 2rem;
+}
+
+/* Flexbox untuk card di dalam grid */
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}</code></pre>
+
+                <h2>Tips dan Best Practices</h2>
+                <div class="highlight-box">
+                    <p><strong>💡 Pro Tips:</strong></p>
+                    <ul>
+                        <li>Gunakan Grid untuk struktur macro, Flexbox untuk struktur micro</li>
+                        <li>Flexbox lebih baik untuk content yang dinamis</li>
+                        <li>Grid lebih baik untuk layout yang sudah terdefenisi</li>
+                        <li>Kombinasikan keduanya untuk hasil optimal</li>
+                        <li>Gunakan <code>gap</code> property untuk spacing yang konsisten</li>
+                    </ul>
+                </div>
+
+                <h2>Use Case Praktis</h2>
+                
+                <h3>1. Navigation Bar (Flexbox)</h3>
+                <p>Flexbox sempurna untuk navigation bar karena item umumnya dalam satu baris dan perlu responsive.</p>
+
+                <h3>2. Card Grid (CSS Grid)</h3>
+                <p>CSS Grid ideal untuk grid card karena Anda ingin kontrol yang presisi atas kolom dan baris.</p>
+
+                <h3>3. Blog Layout (Grid + Flexbox)</h3>
+                <p>Gunakan Grid untuk layout utama (sidebar + content), dan Flexbox untuk elemen di dalam artikel.</p>
+
+                <h2>Kesimpulan</h2>
+                <p>Tidak ada jawaban "yang terbaik" antara CSS Grid dan Flexbox - keduanya excellent untuk use case masing-masing. Kuncinya adalah memahami kekuatan masing-masing:</p>
+                <ul>
+                    <li>Gunakan <strong>Flexbox</strong> untuk layout satu dimensi dan komponen kecil</li>
+                    <li>Gunakan <strong>CSS Grid</strong> untuk layout dua dimensi dan struktur halaman</li>
+                    <li>Kombinasikan keduanya untuk hasil terbaik</li>
+                </ul>
+
+                <p>Dengan memahami kapan menggunakan masing-masing tool, Anda dapat membuat layout yang lebih efisien, maintainable, dan responsive. Practice makes perfect - cobalah keduanya dalam project Anda!</p>
+
+                <div class="article-tags">
+                    <span class="tag">CSS</span>
+                    <span class="tag">Flexbox</span>
+                    <span class="tag">Grid</span>
+                    <span class="tag">Layout</span>
+                    <span class="tag">Web Design</span>
+                </div>
+
+                <div class="article-share">
+                    <h3>Bagikan Artikel:</h3>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn twitter">Twitter</a>
+                        <a href="#" class="share-btn facebook">Facebook</a>
+                        <a href="#" class="share-btn linkedin">LinkedIn</a>
+                        <a href="#" class="share-btn whatsapp">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="author-bio">
+                <div class="author-image">
+                    <img src="../assets/images/profile/profile.jpg" alt="Author">
+                </div>
+                <div class="author-info">
+                    <h3>Tentang Penulis</h3>
+                    <h4>Your Name</h4>
+                    <p>Web Developer dengan pengalaman 5+ tahun dalam membangun aplikasi web modern. Passionate tentang berbagi pengetahuan dan membantu developer pemula memulai karir mereka.</p>
+                    <div class="author-social">
+                        <a href="#">Twitter</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <section class="related-articles">
+                <h2>Artikel Terkait</h2>
+                <div class="articles-grid">
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog1.jpg" alt="Web Development">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">Tutorial</span>
+                            <h3><a href="artikel1.html">Mulai Mengembangkan Web 2025</a></h3>
+                            <p>Panduan lengkap untuk memulai karir web developer...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog4.jpg" alt="Responsive Design">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">Design</span>
+                            <h3><a href="artikel4.html">Desain Responsif</a></h3>
+                            <p>Praktik terbaik untuk membuat website responsif...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog3.jpg" alt="JavaScript">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">JavaScript</span>
+                            <h3><a href="artikel3.html">Fitur Modern JavaScript</a></h3>
+                            <p>Fitur-fitur JavaScript terbaru yang harus Anda ketahui...</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <div class="back-to-blog">
+                <a href="blog.html" class="btn btn-secondary">← Kembali ke Blog</a>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Your Name</h3>
+                    <p>Web Developer & Designer passionate about creating beautiful digital experiences.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#">GitHub</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Your Name. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/navigation.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mengoptimalkan Performa Web: Tips dan Teknik">
+    <title>Optimasi Performa Web - Blog Kelompok 4</title>
+    
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Kelompok 4</div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <article class="article-page">
+        <div class="container">
+            <header class="article-header">
+                <div class="article-meta">
+                    <span class="article-category">Performance</span>
+                    <span class="article-date">November 30, 2025</span>
+                    <span class="article-read-time">9 Menit Membaca</span>
+                </div>
+                <h1>Mengoptimalkan Performa Web: Tips dan Teknik</h1>
+                <p class="article-subtitle">Membuat website yang cepat untuk pengalaman pengguna dan SEO yang lebih baik</p>
+            </header>
+
+            <div class="article-image">
+                <img src="../assets/images/blog6.jpg" alt="Web Performance Optimization">
+            </div>
+
+            <div class="article-content">
+                <h2>Pengantar</h2>
+                <p>Performa web sangat penting untuk kesuksesan website Anda. Website yang lambat tidak hanya membuat pengguna frustrasi, tetapi juga berdampak negatif pada SEO dan conversion rates. Menurut Google, 53% pengguna mobile akan meninggalkan website yang loading lebih dari 3 detik. Mari kita pelajari cara mengoptimalkan performa website Anda.</p>
+
+                <h2>Mengapa Performa Penting?</h2>
+                <ul>
+                    <li><strong>User Experience:</strong> Pengguna lebih puas dengan website yang cepat</li>
+                    <li><strong>SEO Rankings:</strong> Google menggunakan page speed sebagai ranking factor</li>
+                    <li><strong>Conversion Rate:</strong> Website yang lebih cepat = conversion yang lebih tinggi</li>
+                    <li><strong>Bounce Rate:</strong> Website lambat meningkatkan bounce rate</li>
+                    <li><strong>Mobile Experience:</strong> Sangat penting untuk pengguna mobile</li>
+                </ul>
+
+                <h2>Core Web Vitals</h2>
+                <p>Google menggunakan Core Web Vitals sebagai metrics untuk mengukur user experience:</p>
+
+                <h3>1. Largest Contentful Paint (LCP)</h3>
+                <p>Mengukur loading performance. Target: < 2.5 detik</p>
+                <ul>
+                    <li>Optimize server response time</li>
+                    <li>Use efficient caching</li>
+                    <li>Optimize images dan video</li>
+                    <li>Preload critical resources</li>
+                </ul>
+
+                <h3>2. First Input Delay (FID)</h3>
+                <p>Mengukur interactivity. Target: < 100ms</p>
+                <ul>
+                    <li>Minimize JavaScript execution time</li>
+                    <li>Break up long tasks</li>
+                    <li>Use web workers</li>
+                    <li>Optimize event handlers</li>
+                </ul>
+
+                <h3>3. Cumulative Layout Shift (CLS)</h3>
+                <p>Mengukur visual stability. Target: < 0.1</p>
+                <ul>
+                    <li>Always include size attributes on images/video</li>
+                    <li>Reserve space for ads</li>
+                    <li>Avoid inserting content above existing content</li>
+                    <li>Use transform animations instead of layout properties</li>
+                </ul>
+
+                <h2>Optimasi Images</h2>
+                <p>Images seringkali menjadi penyebab utama website lambat.</p>
+
+                <h3>1. Compress Images</h3>
+                <pre><code><!-- Tools untuk compress:
+- TinyPNG
+- ImageOptim
+- Squoosh
+- Sharp (Node.js)
+-->
+
+<!-- Modern image formats -->
+&lt;picture&gt;
+    &lt;source srcset="image.webp" type="image/webp"&gt;
+    &lt;source srcset="image.jpg" type="image/jpeg"&gt;
+    &lt;img src="image.jpg" alt="Description"&gt;
+&lt;/picture&gt;</code></pre>
+
+                <h3>2. Responsive Images</h3>
+                <pre><code>&lt;img 
+    srcset="small.jpg 500w,
+            medium.jpg 1000w,
+            large.jpg 1500w"
+    sizes="(max-width: 600px) 500px,
+           (max-width: 1200px) 1000px,
+           1500px"
+    src="medium.jpg"
+    alt="Responsive image"
+&gt;</code></pre>
+
+                <h3>3. Lazy Loading</h3>
+                <pre><code><!-- Native lazy loading -->
+&lt;img src="image.jpg" loading="lazy" alt="Lazy loaded"&gt;
+
+<!-- JavaScript lazy loading -->
+&lt;script&gt;
+const images = document.querySelectorAll('img[data-src]');
+const imageObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const img = entry.target;
+            img.src = img.dataset.src;
+            imageObserver.unobserve(img);
+        }
+    });
+});
+
+images.forEach(img => imageObserver.observe(img));
+&lt;/script&gt;</code></pre>
+
+                <h2>Minimize HTTP Requests</h2>
+                <p>Setiap request membutuhkan waktu. Kurangi jumlah requests:</p>
+
+                <h3>1. Combine Files</h3>
+                <pre><code>/* Sebelum - Multiple files */
+&lt;link rel="stylesheet" href="reset.css"&gt;
+&lt;link rel="stylesheet" href="layout.css"&gt;
+&lt;link rel="stylesheet" href="components.css"&gt;
+
+/* Sesudah - Combined */
+&lt;link rel="stylesheet" href="main.css"&gt;</code></pre>
+
+                <h3>2. CSS Sprites</h3>
+                <pre><code>/* Combine multiple images into one sprite */
+.icon {
+    background-image: url('sprite.png');
+    background-repeat: no-repeat;
+}
+
+.icon-home {
+    background-position: 0 0;
+}
+
+.icon-user {
+    background-position: -50px 0;
+}</code></pre>
+
+                <h3>3. Inline Critical CSS</h3>
+                <pre><code>&lt;head&gt;
+    &lt;style&gt;
+        /* Critical CSS inline */
+        body { margin: 0; font-family: sans-serif; }
+        .header { background: #333; color: white; }
+    &lt;/style&gt;
+    
+    &lt;!-- Load rest of CSS async --&gt;
+    &lt;link rel="preload" href="styles.css" as="style" 
+          onload="this.onload=null;this.rel='stylesheet'"&gt;
+&lt;/head&gt;</code></pre>
+
+                <h2>Optimize JavaScript</h2>
+
+                <h3>1. Minify dan Compress</h3>
+                <pre><code>// Use build tools
+// Webpack, Vite, Parcel, esbuild
+
+// Minification: Remove whitespace, comments
+// Compression: Gzip or Brotli
+
+// webpack.config.js
+module.exports = {
+    mode: 'production',
+    optimization: {
+        minimize: true
+    }
+};</code></pre>
+
+                <h3>2. Code Splitting</h3>
+                <pre><code>// Dynamic imports
+const loadModule = async () => {
+    const module = await import('./heavy-module.js');
+    module.init();
+};
+
+// React lazy loading
+import { lazy, Suspense } from 'react';
+const HeavyComponent = lazy(() => import('./HeavyComponent'));
+
+function App() {
+    return (
+        &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+            &lt;HeavyComponent /&gt;
+        &lt;/Suspense&gt;
+    );
+}</code></pre>
+
+                <h3>3. Defer/Async Scripts</h3>
+                <pre><code>&lt;!-- Async: Download parallel, execute ASAP --&gt;
+&lt;script src="analytics.js" async&gt;&lt;/script&gt;
+
+&lt;!-- Defer: Download parallel, execute after HTML parsed --&gt;
+&lt;script src="app.js" defer&gt;&lt;/script&gt;
+
+&lt;!-- Best practice: Place scripts at bottom --&gt;
+&lt;body&gt;
+    &lt;!-- content --&gt;
+    &lt;script src="app.js"&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+
+                <h2>Browser Caching</h2>
+                <pre><code>// .htaccess (Apache)
+&lt;IfModule mod_expires.c&gt;
+    ExpiresActive On
+    
+    # Images
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    
+    # CSS dan JavaScript
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    
+    # HTML
+    ExpiresByType text/html "access plus 0 seconds"
+&lt;/IfModule&gt;
+
+// Express.js
+const express = require('express');
+const app = express();
+
+app.use(express.static('public', {
+    maxAge: '1y',
+    etag: false
+}));</code></pre>
+
+                <h2>Content Delivery Network (CDN)</h2>
+                <p>CDN menyimpan copy website Anda di berbagai lokasi geografis untuk delivery yang lebih cepat.</p>
+
+                <div class="highlight-box">
+                    <p><strong>💡 Popular CDNs:</strong></p>
+                    <ul>
+                        <li>Cloudflare (Free tier available)</li>
+                        <li>AWS CloudFront</li>
+                        <li>Google Cloud CDN</li>
+                        <li>Fastly</li>
+                        <li>KeyCDN</li>
+                    </ul>
+                </div>
+
+                <h2>Database Optimization</h2>
+                <p>Untuk dynamic websites:</p>
+
+                <ul>
+                    <li><strong>Indexing:</strong> Index kolom yang sering di-query</li>
+                    <li><strong>Query Optimization:</strong> Avoid N+1 queries</li>
+                    <li><strong>Caching:</strong> Cache database queries (Redis, Memcached)</li>
+                    <li><strong>Connection Pooling:</strong> Reuse database connections</li>
+                    <li><strong>Pagination:</strong> Limit data yang di-load</li>
+                </ul>
+
+                <h2>Server-Side Optimization</h2>
+
+                <h3>1. Enable Compression</h3>
+                <pre><code>// Express.js
+const compression = require('compression');
+app.use(compression());
+
+// Nginx
+gzip on;
+gzip_types text/plain text/css application/json application/javascript;</code></pre>
+
+                <h3>2. Use HTTP/2</h3>
+                <p>HTTP/2 memberikan multiplexing, server push, dan header compression.</p>
+
+                <h3>3. Optimize Server Response Time</h3>
+                <ul>
+                    <li>Use fast server (Node.js, Go, Rust)</li>
+                    <li>Optimize application code</li>
+                    <li>Scale horizontally when needed</li>
+                    <li>Use load balancer</li>
+                </ul>
+
+                <h2>Monitoring Tools</h2>
+                <p>Tools untuk measure dan monitor performa:</p>
+
+                <ol>
+                    <li><strong>Google Lighthouse:</strong> Comprehensive performance audit</li>
+                    <li><strong>WebPageTest:</strong> Detailed performance testing</li>
+                    <li><strong>GTmetrix:</strong> Performance analysis dan monitoring</li>
+                    <li><strong>Chrome DevTools:</strong> Network dan Performance tabs</li>
+                    <li><strong>Google PageSpeed Insights:</strong> Core Web Vitals scores</li>
+                </ol>
+
+                <h2>Performance Checklist</h2>
+                <div class="highlight-box">
+                    <p><strong>✅ Checklist:</strong></p>
+                    <ul>
+                        <li>Optimize dan compress images</li>
+                        <li>Enable lazy loading</li>
+                        <li>Minify CSS dan JavaScript</li>
+                        <li>Use code splitting</li>
+                        <li>Enable browser caching</li>
+                        <li>Use CDN</li>
+                        <li>Enable compression (Gzip/Brotli)</li>
+                        <li>Optimize Critical Rendering Path</li>
+                        <li>Reduce server response time</li>
+                        <li>Monitor Core Web Vitals</li>
+                    </ul>
+                </div>
+
+                <h2>Kesimpulan</h2>
+                <p>Optimasi performa web adalah proses berkelanjutan, bukan one-time task. Dengan menerapkan teknik-teknik di atas - dari optimasi images hingga server-side improvements - Anda dapat secara signifikan meningkatkan performa website Anda.</p>
+
+                <p>Remember: Measure, optimize, dan monitor secara teratur. Gunakan tools seperti Lighthouse untuk track progress Anda dan identify area yang perlu improvement.</p>
+
+                <p>Start dengan quick wins seperti image optimization dan caching, kemudian lanjutkan dengan optimasi yang lebih advanced. Setiap millisecond counts! ⚡</p>
+
+                <div class="article-tags">
+                    <span class="tag">Performance</span>
+                    <span class="tag">Optimization</span>
+                    <span class="tag">Web Development</span>
+                    <span class="tag">SEO</span>
+                    <span class="tag">Core Web Vitals</span>
+                </div>
+
+                <div class="article-share">
+                    <h3>Bagikan Artikel:</h3>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn twitter">Twitter</a>
+                        <a href="#" class="share-btn facebook">Facebook</a>
+                        <a href="#" class="share-btn linkedin">LinkedIn</a>
+                        <a href="#" class="share-btn whatsapp">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="author-bio">
+                <div class="author-image">
+                    <img src="../assets/images/profile/profile.jpg" alt="Author">
+                </div>
+                <div class="author-info">
+                    <h3>Tentang Penulis</h3>
+                    <h4>Kelompok 4</h4>
+                    <p>Tim pengembang web dengan pengalaman dalam membangun aplikasi modern. Passionate tentang berbagi pengetahuan dan membantu developer pemula memulai karir mereka.</p>
+                    <div class="author-social">
+                        <a href="https://github.com/Afriadiikhwan" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <section class="related-articles">
+                <h2>Artikel Terkait</h2>
+                <div class="articles-grid">
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog4.jpg" alt="Responsive">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">Design</span>
+                            <h3><a href="artikel4.html">Desain Responsif</a></h3>
+                            <p>Praktik terbaik untuk membuat website responsif...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog3.jpg" alt="JavaScript">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">JavaScript</span>
+                            <h3><a href="artikel3.html">Fitur Modern JavaScript</a></h3>
+                            <p>Fitur-fitur JavaScript yang harus Anda ketahui...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog1.jpg" alt="Web Dev">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">Tutorial</span>
+                            <h3><a href="artikel1.html">Mulai Mengembangkan Web</a></h3>
+                            <p>Panduan untuk memulai karir sebagai web developer...</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <div class="back-to-blog">
+                <a href="blog.html" class="btn btn-secondary">← Kembali ke Blog</a>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kelompok 4</h3>
+                    <p>Pengembangan & Desain Web yang bersemangat menciptakan pengalaman digital yang indah.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/Afriadiikhwan" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kelompok 4. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/navigation.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mastering React Hooks: Panduan Komprehensif">
+    <title>Mastering React Hooks - Blog Kelompok 4</title>
+    
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Kelompok 4</div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <article class="article-page">
+        <div class="container">
+            <header class="article-header">
+                <div class="article-meta">
+                    <span class="article-category">React</span>
+                    <span class="article-date">December 5, 2025</span>
+                    <span class="article-read-time">12 Menit Membaca</span>
+                </div>
+                <h1>Mastering React Hooks: Panduan Komprehensif</h1>
+                <p class="article-subtitle">Dari useState hingga custom hooks - panduan lengkap React Hooks</p>
+            </header>
+
+            <div class="article-image">
+                <img src="../assets/images/blog5.jpg" alt="React Hooks">
+            </div>
+
+            <div class="article-content">
+                <h2>Pengantar</h2>
+                <p>React Hooks telah merevolusi cara kita menulis komponen React. Sejak diperkenalkan di React 16.8, Hooks memungkinkan kita menggunakan state dan fitur React lainnya tanpa menulis class component. Panduan ini akan membahas semua yang perlu Anda ketahui tentang React Hooks.</p>
+
+                <h2>Apa itu React Hooks?</h2>
+                <p>Hooks adalah fungsi yang memungkinkan Anda "hook into" React state dan lifecycle features dari function components. Sebelum Hooks, kita harus menggunakan class components untuk menggunakan state dan lifecycle methods.</p>
+
+                <h2>1. useState - State Management</h2>
+                <p>Hook paling dasar untuk menambahkan state ke function component.</p>
+
+                <pre><code>import { useState } from 'react';
+
+function Counter() {
+    // Declare state variable
+    const [count, setCount] = useState(0);
+    
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Count: {count}&lt;/p&gt;
+            &lt;button onClick={() => setCount(count + 1)}&gt;
+                Increment
+            &lt;/button&gt;
+        &lt;/div&gt;
+    );
+}
+
+// Multiple state variables
+function Form() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [age, setAge] = useState(0);
+    
+    return (
+        // ...
+    );
+}
+
+// State dengan object
+function User() {
+    const [user, setUser] = useState({
+        name: '',
+        email: '',
+        age: 0
+    });
+    
+    const updateName = (newName) => {
+        setUser(prev => ({
+            ...prev,
+            name: newName
+        }));
+    };
+}</code></pre>
+
+                <h2>2. useEffect - Side Effects</h2>
+                <p>Menangani side effects seperti data fetching, subscriptions, atau manual DOM manipulation.</p>
+
+                <pre><code>import { useState, useEffect } from 'react';
+
+// Basic useEffect
+function DataFetcher() {
+    const [data, setData] = useState(null);
+    
+    useEffect(() => {
+        // Runs after every render
+        console.log('Component rendered');
+    });
+    
+    // With dependency array - runs once on mount
+    useEffect(() => {
+        fetch('/api/data')
+            .then(res => res.json())
+            .then(data => setData(data));
+    }, []); // Empty array = run once
+    
+    // With dependencies
+    useEffect(() => {
+        // Runs when 'id' changes
+        fetchUser(id);
+    }, [id]);
+    
+    // With cleanup
+    useEffect(() => {
+        const subscription = api.subscribe();
+        
+        return () => {
+            // Cleanup function
+            subscription.unsubscribe();
+        };
+    }, []);
+}</code></pre>
+
+                <h2>3. useContext - Context API</h2>
+                <p>Mengakses context tanpa menggunakan Consumer component.</p>
+
+                <pre><code>import { createContext, useContext } from 'react';
+
+// Create context
+const ThemeContext = createContext('light');
+
+// Provider
+function App() {
+    return (
+        &lt;ThemeContext.Provider value="dark"&gt;
+            &lt;Toolbar /&gt;
+        &lt;/ThemeContext.Provider&gt;
+    );
+}
+
+// Consumer dengan useContext
+function ThemedButton() {
+    const theme = useContext(ThemeContext);
+    
+    return (
+        &lt;button className={theme}&gt;
+            Themed Button
+        &lt;/button&gt;
+    );
+}</code></pre>
+
+                <h2>4. useReducer - Complex State Logic</h2>
+                <p>Alternatif useState untuk state logic yang kompleks.</p>
+
+                <pre><code>import { useReducer } from 'react';
+
+// Reducer function
+function counterReducer(state, action) {
+    switch (action.type) {
+        case 'increment':
+            return { count: state.count + 1 };
+        case 'decrement':
+            return { count: state.count - 1 };
+        case 'reset':
+            return { count: 0 };
+        default:
+            return state;
+    }
+}
+
+function Counter() {
+    const [state, dispatch] = useReducer(
+        counterReducer, 
+        { count: 0 }
+    );
+    
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Count: {state.count}&lt;/p&gt;
+            &lt;button onClick={() => dispatch({ type: 'increment' })}&gt;
+                +
+            &lt;/button&gt;
+            &lt;button onClick={() => dispatch({ type: 'decrement' })}&gt;
+                -
+            &lt;/button&gt;
+            &lt;button onClick={() => dispatch({ type: 'reset' })}&gt;
+                Reset
+            &lt;/button&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+                <h2>5. useRef - Mutable References</h2>
+                <p>Menyimpan mutable value yang tidak trigger re-render.</p>
+
+                <pre><code>import { useRef, useEffect } from 'react';
+
+function TextInput() {
+    const inputRef = useRef(null);
+    
+    useEffect(() => {
+        // Focus input on mount
+        inputRef.current.focus();
+    }, []);
+    
+    return (
+        &lt;input ref={inputRef} type="text" /&gt;
+    );
+}
+
+// Store previous value
+function Counter() {
+    const [count, setCount] = useState(0);
+    const prevCountRef = useRef();
+    
+    useEffect(() => {
+        prevCountRef.current = count;
+    });
+    
+    const prevCount = prevCountRef.current;
+    
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Current: {count}&lt;/p&gt;
+            &lt;p&gt;Previous: {prevCount}&lt;/p&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+                <h2>6. useMemo - Memoization</h2>
+                <p>Memoize expensive calculations.</p>
+
+                <pre><code>import { useMemo, useState } from 'react';
+
+function ExpensiveComponent({ items }) {
+    const [filter, setFilter] = useState('');
+    
+    // Expensive calculation
+    const filteredItems = useMemo(() => {
+        console.log('Filtering items...');
+        return items.filter(item => 
+            item.name.includes(filter)
+        );
+    }, [items, filter]); // Only recalculate when these change
+    
+    return (
+        &lt;div&gt;
+            &lt;input 
+                value={filter}
+                onChange={e => setFilter(e.target.value)}
+            /&gt;
+            {filteredItems.map(item => (
+                &lt;div key={item.id}&gt;{item.name}&lt;/div&gt;
+            ))}
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+                <h2>7. useCallback - Memoize Functions</h2>
+                <p>Memoize callback functions untuk prevent unnecessary re-renders.</p>
+
+                <pre><code>import { useCallback, memo } from 'react';
+
+// Child component
+const Child = memo(({ onClick }) => {
+    console.log('Child rendered');
+    return &lt;button onClick={onClick}&gt;Click&lt;/button&gt;;
+});
+
+// Parent component
+function Parent() {
+    const [count, setCount] = useState(0);
+    
+    // Without useCallback - new function on every render
+    // const handleClick = () => {
+    //     console.log('Clicked');
+    // };
+    
+    // With useCallback - same function reference
+    const handleClick = useCallback(() => {
+        console.log('Clicked');
+    }, []); // Dependencies
+    
+    return (
+        &lt;div&gt;
+            &lt;p&gt;Count: {count}&lt;/p&gt;
+            &lt;button onClick={() => setCount(count + 1)}&gt;
+                Increment
+            &lt;/button&gt;
+            &lt;Child onClick={handleClick} /&gt;
+        &lt;/div&gt;
+    );
+}</code></pre>
+
+                <h2>8. Custom Hooks</h2>
+                <p>Membuat hooks sendiri untuk reusable logic.</p>
+
+                <pre><code>// Custom hook untuk fetch data
+function useFetch(url) {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
+    useEffect(() => {
+        setLoading(true);
+        fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                setData(data);
+                setLoading(false);
+            })
+            .catch(err => {
+                setError(err);
+                setLoading(false);
+            });
+    }, [url]);
+    
+    return { data, loading, error };
+}
+
+// Usage
+function UserProfile({ userId }) {
+    const { data, loading, error } = useFetch(`/api/users/${userId}`);
+    
+    if (loading) return &lt;div&gt;Loading...&lt;/div&gt;;
+    if (error) return &lt;div&gt;Error: {error.message}&lt;/div&gt;;
+    
+    return &lt;div&gt;{data.name}&lt;/div&gt;;
+}
+
+// Custom hook untuk localStorage
+function useLocalStorage(key, initialValue) {
+    const [value, setValue] = useState(() => {
+        const saved = localStorage.getItem(key);
+        return saved ? JSON.parse(saved) : initialValue;
+    });
+    
+    useEffect(() => {
+        localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value]);
+    
+    return [value, setValue];
+}</code></pre>
+
+                <h2>Rules of Hooks</h2>
+                <div class="highlight-box">
+                    <p><strong>⚠️ Aturan Penting:</strong></p>
+                    <ul>
+                        <li><strong>Only call Hooks at the top level:</strong> Jangan panggil Hooks di dalam loops, conditions, atau nested functions</li>
+                        <li><strong>Only call Hooks from React functions:</strong> Function components atau custom Hooks</li>
+                        <li><strong>Custom Hooks harus dimulai dengan "use":</strong> Convention untuk mudah identify</li>
+                    </ul>
+                </div>
+
+                <h2>Best Practices</h2>
+                <ul>
+                    <li>Gunakan <code>useState</code> untuk simple state, <code>useReducer</code> untuk complex state</li>
+                    <li>Dependency array di <code>useEffect</code> harus complete dan accurate</li>
+                    <li>Extract reusable logic ke custom Hooks</li>
+                    <li>Gunakan <code>useMemo</code> dan <code>useCallback</code> untuk optimization, tapi jangan premature optimization</li>
+                    <li>Keep components small dan focused</li>
+                </ul>
+
+                <h2>Common Patterns</h2>
+
+                <h3>1. Fetch Data Pattern</h3>
+                <pre><code>function DataComponent() {
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    
+    useEffect(() => {
+        let cancelled = false;
+        
+        setLoading(true);
+        fetchData()
+            .then(result => {
+                if (!cancelled) {
+                    setData(result);
+                    setLoading(false);
+                }
+            })
+            .catch(err => {
+                if (!cancelled) {
+                    setError(err);
+                    setLoading(false);
+                }
+            });
+        
+        return () => {
+            cancelled = true;
+        };
+    }, []);
+}</code></pre>
+
+                <h3>2. Debounce Pattern</h3>
+                <pre><code>function useDebounce(value, delay) {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+    
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+        
+        return () => clearTimeout(timer);
+    }, [value, delay]);
+    
+    return debouncedValue;
+}</code></pre>
+
+                <h2>Kesimpulan</h2>
+                <p>React Hooks adalah game-changer dalam React development. Mereka membuat code lebih clean, reusable, dan mudah dipahami. Dengan menguasai Hooks - dari basic useState dan useEffect hingga advanced custom Hooks - Anda dapat menulis React applications yang lebih efficient dan maintainable.</p>
+
+                <p>Practice adalah kunci! Mulai refactor class components Anda ke function components dengan Hooks, dan coba buat custom Hooks untuk logic yang reusable.</p>
+
+                <div class="article-tags">
+                    <span class="tag">React</span>
+                    <span class="tag">Hooks</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">Frontend</span>
+                    <span class="tag">Web Development</span>
+                </div>
+
+                <div class="article-share">
+                    <h3>Bagikan Artikel:</h3>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn twitter">Twitter</a>
+                        <a href="#" class="share-btn facebook">Facebook</a>
+                        <a href="#" class="share-btn linkedin">LinkedIn</a>
+                        <a href="#" class="share-btn whatsapp">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="author-bio">
+                <div class="author-image">
+                    <img src="../assets/images/profile/profile.jpg" alt="Author">
+                </div>
+                <div class="author-info">
+                    <h3>Tentang Penulis</h3>
+                    <h4>Kelompok 4</h4>
+                    <p>Tim pengembang web dengan pengalaman dalam membangun aplikasi modern. Passionate tentang berbagi pengetahuan dan membantu developer pemula memulai karir mereka.</p>
+                    <div class="author-social">
+                        <a href="https://github.com/Afriadiikhwan" target="_blank">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <section class="related-articles">
+                <h2>Artikel Terkait</h2>
+                <div class="articles-grid">
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog3.jpg" alt="JavaScript">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">JavaScript</span>
+                            <h3><a href="artikel3.html">Fitur Modern JavaScript</a></h3>
+                            <p>Fitur-fitur JavaScript terbaru yang harus Anda ketahui...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog1.jpg" alt="Web Dev">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">Tutorial</span>
+                            <h3><a href="artikel1.html">Mulai Mengembangkan Web</a></h3>
+                            <p>Panduan untuk memulai karir sebagai web developer...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog6.jpg" alt="Performance">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">Performance</span>
+                            <h3><a href="artikel6.html">Optimasi Performa Web</a></h3>
+                            <p>Tips untuk membuat website yang cepat...</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <div class="back-to-blog">
+                <a href="blog.html" class="btn btn-secondary">← Kembali ke Blog</a>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Kelompok 4</h3>
+                    <p>Pengembangan & Desain Web yang bersemangat menciptakan pengalaman digital yang indah.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/Afriadiikhwan" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Kelompok 4. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/navigation.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>

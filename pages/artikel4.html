@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Desain Responsif: Praktik Terbaik untuk 2024">
+    <title>Desain Responsif - Blog</title>
+    
+    <link rel="stylesheet" href="../assets/css/variables.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Your Name</div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <article class="article-page">
+        <div class="container">
+            <header class="article-header">
+                <div class="article-meta">
+                    <span class="article-category">Design</span>
+                    <span class="article-date">December 10, 2025</span>
+                    <span class="article-read-time">7 Menit Membaca</span>
+                </div>
+                <h1>Desain Responsif: Praktik Terbaik untuk 2024</h1>
+                <p class="article-subtitle">Membangun website yang tampil sempurna di semua device</p>
+            </header>
+
+            <div class="article-image">
+                <img src="../assets/images/blog4.jpg" alt="Responsive Design">
+            </div>
+
+            <div class="article-content">
+                <h2>Pengantar</h2>
+                <p>Di era digital saat ini, pengguna mengakses website dari berbagai device dengan ukuran layar yang berbeda-beda. Dari smartphone hingga desktop 4K, website Anda harus tampil sempurna di semua platform. Desain responsif bukan lagi optional - ini adalah kebutuhan fundamental.</p>
+
+                <h2>Apa itu Responsive Design?</h2>
+                <p>Responsive design adalah pendekatan desain web yang membuat halaman Anda beradaptasi dengan ukuran layar dan orientasi device pengguna. Dengan responsive design, Anda membuat satu website yang bekerja di semua device, bukan membuat versi terpisah untuk mobile dan desktop.</p>
+
+                <h2>Mobile-First Approach</h2>
+                <p>Mulailah mendesain untuk mobile, kemudian tingkatkan untuk layar yang lebih besar. Pendekatan ini memastikan pengalaman mobile yang optimal.</p>
+
+                <pre><code>/* Mobile styles (default) */
+.container {
+    width: 100%;
+    padding: 1rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+    .container {
+        padding: 2rem;
+    }
+    
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+}</code></pre>
+
+                <h2>Breakpoints yang Tepat</h2>
+                <p>Gunakan breakpoints yang masuk akal untuk berbagai ukuran device:</p>
+
+                <pre><code>/* Breakpoints umum */
+$breakpoint-sm: 576px;   // Smartphone landscape
+$breakpoint-md: 768px;   // Tablet portrait
+$breakpoint-lg: 992px;   // Tablet landscape / Small desktop
+$breakpoint-xl: 1200px;  // Desktop
+$breakpoint-xxl: 1400px; // Large desktop</code></pre>
+
+                <h2>Flexible Layouts</h2>
+                <p>Gunakan unit yang fleksibel untuk membuat layout yang adaptif:</p>
+
+                <h3>1. Relative Units</h3>
+                <pre><code>/* Gunakan % untuk width */
+.sidebar {
+    width: 30%;
+}
+
+.main-content {
+    width: 70%;
+}
+
+/* Gunakan rem/em untuk spacing dan typography */
+.heading {
+    font-size: 2rem;      /* 32px if base is 16px */
+    margin-bottom: 1.5rem; /* 24px */
+}
+
+/* Gunakan vw/vh untuk full-screen sections */
+.hero {
+    height: 100vh;
+    width: 100vw;
+}</code></pre>
+
+                <h3>2. Flexbox untuk Layouts</h3>
+                <pre><code>.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.card {
+    flex: 1 1 300px; /* Grow, shrink, base width */
+}</code></pre>
+
+                <h3>3. CSS Grid yang Responsif</h3>
+                <pre><code>/* Auto-fit: kolom sebanyak mungkin */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Auto-fill: tetap buat kolom meski kosong */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}</code></pre>
+
+                <h2>Images yang Responsif</h2>
+                <p>Pastikan gambar beradaptasi dengan baik:</p>
+
+                <pre><code>/* Basic responsive image */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive background image */
+.hero {
+    background-image: url('mobile.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+@media (min-width: 768px) {
+    .hero {
+        background-image: url('desktop.jpg');
+    }
+}
+
+/* Modern: srcset untuk different resolutions */</code></pre>
+
+                <h2>Typography yang Responsif</h2>
+                <p>Ukuran font harus menyesuaikan dengan ukuran layar:</p>
+
+                <pre><code>/* Using clamp() - Modern approach */
+h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    /* min: 2rem, preferred: 5vw, max: 4rem */
+}
+
+/* Using calc() */
+p {
+    font-size: calc(1rem + 0.5vw);
+}
+
+/* Traditional media queries */
+body {
+    font-size: 16px;
+}
+
+@media (min-width: 768px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 1200px) {
+    body {
+        font-size: 20px;
+    }
+}</code></pre>
+
+                <h2>Touch-Friendly Design</h2>
+                <p>Pertimbangkan pengguna touchscreen:</p>
+
+                <ul>
+                    <li><strong>Minimum tap target:</strong> 44x44px untuk elemen yang bisa diklik</li>
+                    <li><strong>Spacing:</strong> Beri jarak yang cukup antar elemen</li>
+                    <li><strong>Hover states:</strong> Jangan hanya andalkan hover</li>
+                </ul>
+
+                <pre><code>/* Touch-friendly buttons */
+.button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 24px;
+    margin: 8px;
+}
+
+/* Tidak hanya hover */
+@media (hover: none) {
+    .card:hover {
+        /* Tidak ada hover effect pada touch devices */
+        transform: none;
+    }
+}</code></pre>
+
+                <h2>Testing Responsiveness</h2>
+                <p>Cara testing desain responsif Anda:</p>
+
+                <ol>
+                    <li><strong>Browser DevTools:</strong> Chrome/Firefox DevTools dengan device emulation</li>
+                    <li><strong>Real Devices:</strong> Test di smartphone, tablet, dan desktop nyata</li>
+                    <li><strong>Online Tools:</strong> Responsinator, BrowserStack</li>
+                    <li><strong>Different Orientations:</strong> Portrait dan landscape</li>
+                </ol>
+
+                <h2>Common Responsive Patterns</h2>
+
+                <h3>1. Collapsing Navigation</h3>
+                <p>Menu yang berubah menjadi hamburger menu di mobile.</p>
+
+                <h3>2. Flexible Grid</h3>
+                <p>Grid yang menyesuaikan jumlah kolom berdasarkan layar.</p>
+
+                <h3>3. Stacked Layout</h3>
+                <p>Sidebar dan content yang stack di mobile.</p>
+
+                <h3>4. Hide/Show Content</h3>
+                <p>Sembunyikan konten non-essential di mobile.</p>
+
+                <pre><code>/* Hide di mobile, show di desktop */
+.desktop-only {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .desktop-only {
+        display: block;
+    }
+}
+
+/* Show di mobile, hide di desktop */
+.mobile-only {
+    display: block;
+}
+
+@media (min-width: 768px) {
+    .mobile-only {
+        display: none;
+    }
+}</code></pre>
+
+                <h2>Performance Considerations</h2>
+                <div class="highlight-box">
+                    <p><strong>💡 Tips Performance:</strong></p>
+                    <ul>
+                        <li>Gunakan lazy loading untuk images</li>
+                        <li>Minimize HTTP requests</li>
+                        <li>Optimize images untuk web</li>
+                        <li>Use CDN untuk static assets</li>
+                        <li>Critical CSS untuk above-the-fold content</li>
+                    </ul>
+                </div>
+
+                <h2>Accessibility (A11y)</h2>
+                <p>Responsive design harus tetap accessible:</p>
+                <ul>
+                    <li>Proper semantic HTML</li>
+                    <li>Keyboard navigation yang baik</li>
+                    <li>Color contrast yang cukup</li>
+                    <li>Screen reader friendly</li>
+                    <li>Focus states yang jelas</li>
+                </ul>
+
+                <h2>Kesimpulan</h2>
+                <p>Responsive design adalah fundamental skill yang harus dikuasai setiap web developer. Dengan mengikuti best practices ini - mobile-first approach, flexible layouts, responsive typography, dan touch-friendly design - Anda dapat membuat website yang memberikan pengalaman optimal di semua device.</p>
+
+                <p>Remember: Test, test, test! Selalu test desain Anda di berbagai device dan browser untuk memastikan compatibility yang sempurna.</p>
+
+                <div class="article-tags">
+                    <span class="tag">Responsive Design</span>
+                    <span class="tag">CSS</span>
+                    <span class="tag">Mobile-First</span>
+                    <span class="tag">Web Design</span>
+                    <span class="tag">UX</span>
+                </div>
+
+                <div class="article-share">
+                    <h3>Bagikan Artikel:</h3>
+                    <div class="share-buttons">
+                        <a href="#" class="share-btn twitter">Twitter</a>
+                        <a href="#" class="share-btn facebook">Facebook</a>
+                        <a href="#" class="share-btn linkedin">LinkedIn</a>
+                        <a href="#" class="share-btn whatsapp">WhatsApp</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="author-bio">
+                <div class="author-image">
+                    <img src="../assets/images/profile/profile.jpg" alt="Author">
+                </div>
+                <div class="author-info">
+                    <h3>Tentang Penulis</h3>
+                    <h4>Your Name</h4>
+                    <p>Web Developer dengan pengalaman 5+ tahun dalam membangun aplikasi web modern. Passionate tentang berbagi pengetahuan dan membantu developer pemula memulai karir mereka.</p>
+                    <div class="author-social">
+                        <a href="#">Twitter</a>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">GitHub</a>
+                    </div>
+                </div>
+            </div>
+
+            <section class="related-articles">
+                <h2>Artikel Terkait</h2>
+                <div class="articles-grid">
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog2.jpg" alt="CSS Grid">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">CSS</span>
+                            <h3><a href="artikel2.html">CSS Grid vs Flexbox</a></h3>
+                            <p>Memahami kapan menggunakan Grid atau Flexbox...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog6.jpg" alt="Performance">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">Performance</span>
+                            <h3><a href="artikel6.html">Optimasi Performa Web</a></h3>
+                            <p>Tips untuk membuat website yang cepat...</p>
+                        </div>
+                    </article>
+
+                    <article class="article-card">
+                        <div class="article-card-image">
+                            <img src="../assets/images/blog1.jpg" alt="Web Dev">
+                        </div>
+                        <div class="article-card-content">
+                            <span class="article-card-category">Tutorial</span>
+                            <h3><a href="artikel1.html">Mulai Mengembangkan Web</a></h3>
+                            <p>Panduan untuk memulai karir sebagai web developer...</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <div class="back-to-blog">
+                <a href="blog.html" class="btn btn-secondary">← Kembali ke Blog</a>
+            </div>
+        </div>
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Your Name</h3>
+                    <p>Web Developer & Designer passionate about creating beautiful digital experiences.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <div class="social-links">
+                        <a href="#">GitHub</a>
+                    
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Your Name. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/navigation.js"></script>
+    <script src="../assets/js/main.js"></script>
+</body>
+</html>
