@@ -44,6 +44,12 @@
             <div class="blog-layout">
                 <!-- Main Blog Content -->
                 <div class="blog-main">
+                    <!-- Search Results Message -->
+                    <div id="searchResultsMessage" style="display: none; padding: 15px; margin-bottom: 20px; background: #f0f0f0; border-radius: 5px;">
+                        <span id="searchResultsText"></span>
+                        <button id="clearSearch" style="margin-left: 10px; padding: 5px 10px; background: #333; color: white; border: none; border-radius: 3px; cursor: pointer;">Hapus Pencarian</button>
+                    </div>
+
                     <!-- Blog Post 1 -->
                     <article class="blog-post-full">
                         <div class="blog-image">
@@ -134,6 +140,12 @@
                         <a href="artikel6.html" class="read-more">Baca lebih lanjut →</a>
                     </article>
 
+                    <!-- No Results Message -->
+                    <div id="noResultsMessage" style="display: none; padding: 30px; text-align: center; background: #f9f9f9; border-radius: 8px; margin: 20px 0;">
+                        <h3 style="color: #666;">Tidak ada artikel yang ditemukan</h3>
+                        <p style="color: #999;">Coba kata kunci pencarian yang berbeda</p>
+                    </div>
+
                     <!-- Pagination -->
                     <div class="pagination">
                         <a href="#" class="page-link active">1</a>
@@ -149,8 +161,8 @@
                     <div class="sidebar-widget">
                         <h3>Mencari</h3>
                         <div class="search-box">
-                            <input type="text" placeholder="Cari artikel...">
-                            <button>Mencari</button>
+                            <input type="text" id="searchInput" placeholder="Cari artikel...">
+                            <button id="searchButton">Mencari</button>
                         </div>
                     </div>
 
@@ -266,5 +278,91 @@
 
     <script src="../assets/js/navigation.js"></script>
     <script src="../assets/js/main.js"></script>
+    
+    <!-- Search Functionality Script -->
+    <script>
+        // Fungsi pencarian artikel
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const searchButton = document.getElementById('searchButton');
+            const blogPosts = document.querySelectorAll('.blog-post-full');
+            const noResultsMessage = document.getElementById('noResultsMessage');
+            const searchResultsMessage = document.getElementById('searchResultsMessage');
+            const searchResultsText = document.getElementById('searchResultsText');
+            const clearSearchButton = document.getElementById('clearSearch');
+            const pagination = document.querySelector('.pagination');
+
+            // Fungsi untuk melakukan pencarian
+            function searchArticles() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                if (searchTerm === '') {
+                    // Jika pencarian kosong, tampilkan semua artikel
+                    blogPosts.forEach(post => post.style.display = 'block');
+                    noResultsMessage.style.display = 'none';
+                    searchResultsMessage.style.display = 'none';
+                    pagination.style.display = 'flex';
+                    return;
+                }
+
+                // Lakukan pencarian
+                blogPosts.forEach(post => {
+                    const title = post.querySelector('h2').textContent.toLowerCase();
+                    const content = post.querySelector('p').textContent.toLowerCase();
+                    const category = post.querySelector('.blog-category').textContent.toLowerCase();
+                    
+                    if (title.includes(searchTerm) || content.includes(searchTerm) || category.includes(searchTerm)) {
+                        post.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+
+                // Tampilkan pesan hasil pencarian
+                if (visibleCount > 0) {
+                    noResultsMessage.style.display = 'none';
+                    searchResultsMessage.style.display = 'block';
+                    searchResultsText.textContent = `Ditemukan ${visibleCount} artikel untuk "${searchTerm}"`;
+                    pagination.style.display = 'none';
+                } else {
+                    noResultsMessage.style.display = 'block';
+                    searchResultsMessage.style.display = 'none';
+                    pagination.style.display = 'none';
+                }
+            }
+
+            // Fungsi untuk menghapus pencarian
+            function clearSearch() {
+                searchInput.value = '';
+                blogPosts.forEach(post => post.style.display = 'block');
+                noResultsMessage.style.display = 'none';
+                searchResultsMessage.style.display = 'none';
+                pagination.style.display = 'flex';
+            }
+
+            // Event listener untuk button pencarian
+            searchButton.addEventListener('click', searchArticles);
+
+            // Event listener untuk tombol hapus pencarian
+            clearSearchButton.addEventListener('click', clearSearch);
+
+            // Event listener untuk Enter key pada input
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    searchArticles();
+                }
+            });
+
+            // Event listener untuk input real-time (opsional)
+            searchInput.addEventListener('input', function() {
+                if (searchInput.value === '') {
+                    clearSearch();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
