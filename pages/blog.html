@@ -44,6 +44,17 @@
             <div class="blog-layout">
                 <!-- Main Blog Content -->
                 <div class="blog-main">
+                    <!-- Form Pencarian Utama -->
+                    <div class="main-search-section">
+                        <div class="main-search-box">
+                            <h2>🔍 Cari Artikel</h2>
+                            <div class="search-form">
+                                <input type="text" id="mainSearchInput" placeholder="Cari berdasarkan judul, konten, atau kategori...">
+                                <button id="mainSearchButton">Cari</button>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Search Results Message -->
                     <div id="searchResultsMessage" style="display: none; padding: 15px; margin-bottom: 20px; background: #f0f0f0; border-radius: 5px;">
                         <span id="searchResultsText"></span>
@@ -155,16 +166,7 @@
                     </div>
                 </div>
 
-                <!-- Sidebar -->
-                <aside class="blog-sidebar">
-                    <!-- Search Widget -->
-                    <div class="sidebar-widget">
-                        <h3>Mencari</h3>
-                        <div class="search-box">
-                            <input type="text" id="searchInput" placeholder="Cari artikel...">
-                            <button id="searchButton">Mencari</button>
-                        </div>
-                    </div>
+           
 
                     <!-- Categories Widget -->
                     <div class="sidebar-widget">
@@ -225,9 +227,7 @@
                             <a href="#" class="tag">API</a>
                             <a href="#" class="tag">MongoDB</a>
                         </div>
-                    </div>
-
-                  
+                    
                 </aside>
             </div>
         </div>
@@ -275,8 +275,8 @@
     <script>
         // Fungsi pencarian artikel
         document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('searchInput');
-            const searchButton = document.getElementById('searchButton');
+            const mainSearchInput = document.getElementById('mainSearchInput');
+            const mainSearchButton = document.getElementById('mainSearchButton');
             const blogPosts = document.querySelectorAll('.blog-post-full');
             const noResultsMessage = document.getElementById('noResultsMessage');
             const searchResultsMessage = document.getElementById('searchResultsMessage');
@@ -285,11 +285,11 @@
             const pagination = document.querySelector('.pagination');
 
             // Fungsi untuk melakukan pencarian
-            function searchArticles() {
-                const searchTerm = searchInput.value.toLowerCase().trim();
+            function searchArticles(searchTerm = null) {
+                const term = searchTerm || mainSearchInput.value.toLowerCase().trim();
                 let visibleCount = 0;
 
-                if (searchTerm === '') {
+                if (term === '') {
                     // Jika pencarian kosong, tampilkan semua artikel
                     blogPosts.forEach(post => post.style.display = 'block');
                     noResultsMessage.style.display = 'none';
@@ -304,7 +304,7 @@
                     const content = post.querySelector('p').textContent.toLowerCase();
                     const category = post.querySelector('.blog-category').textContent.toLowerCase();
                     
-                    if (title.includes(searchTerm) || content.includes(searchTerm) || category.includes(searchTerm)) {
+                    if (title.includes(term) || content.includes(term) || category.includes(term)) {
                         post.style.display = 'block';
                         visibleCount++;
                     } else {
@@ -316,7 +316,7 @@
                 if (visibleCount > 0) {
                     noResultsMessage.style.display = 'none';
                     searchResultsMessage.style.display = 'block';
-                    searchResultsText.textContent = `Ditemukan ${visibleCount} artikel untuk "${searchTerm}"`;
+                    searchResultsText.textContent = `Ditemukan ${visibleCount} artikel untuk "${term}"`;
                     pagination.style.display = 'none';
                 } else {
                     noResultsMessage.style.display = 'block';
@@ -327,21 +327,21 @@
 
             // Fungsi untuk menghapus pencarian
             function clearSearch() {
-                searchInput.value = '';
+                mainSearchInput.value = '';
                 blogPosts.forEach(post => post.style.display = 'block');
                 noResultsMessage.style.display = 'none';
                 searchResultsMessage.style.display = 'none';
                 pagination.style.display = 'flex';
             }
 
-            // Event listener untuk button pencarian
-            searchButton.addEventListener('click', searchArticles);
+            // Event listener untuk button pencarian utama
+            mainSearchButton.addEventListener('click', () => searchArticles());
 
             // Event listener untuk tombol hapus pencarian
             clearSearchButton.addEventListener('click', clearSearch);
 
-            // Event listener untuk Enter key pada input
-            searchInput.addEventListener('keypress', function(e) {
+            // Event listener untuk Enter key pada input utama
+            mainSearchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
                     e.preventDefault();
                     searchArticles();
@@ -349,8 +349,8 @@
             });
 
             // Event listener untuk input real-time (opsional)
-            searchInput.addEventListener('input', function() {
-                if (searchInput.value === '') {
+            mainSearchInput.addEventListener('input', function() {
+                if (mainSearchInput.value === '') {
                     clearSearch();
                 }
             });
