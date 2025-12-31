@@ -39,258 +39,104 @@
         </div>
     </header>
 
-    <!-- Main Content -->
+  <!-- Main Content -->
     <main class="page-content">
         <div class="container">
             <!-- About Section -->
-            <section class="about-section">
-                <div class="about-content">
-                    <div class="about-image">
-                   <img src="../assets/images/fadil.jpg" alt="Fadil" class="image-img">
-                        
-                        <!-- Ganti dengan foto Anda -->
-                        <!-- <img src="../assets/images/profile/profile.jpg" alt="Your Name"> -->
+        <section class="our-team">
+  <h2>Our Team</h2>
 
-                    </div>
-                    <div class="about-text">
-                        <h2>Hello! I'm <span class="highlight">Your Name</span></h2>
-                        <p>I'm a passionate web developer and designer based in Indonesia. I love creating beautiful, functional, and user-friendly websites that solve real-world problems.</p>
-                        <p>With several years of experience in web development, I've had the opportunity to work on diverse projects ranging from small business websites to large-scale web applications. I believe in writing clean, maintainable code and creating intuitive user experiences.</p>
-                        <p>When I'm not coding, you can find me exploring new technologies, reading tech blogs, or enjoying a good cup of coffee while brainstorming new project ideas.</p>
-                        
-                        <div class="about-stats">
-                            <div class="stat-item">
-                                <h3>5+</h3>
-                                <p>Years Experience</p>
-                            </div>
-                            <div class="stat-item">
-                                <h3>50+</h3>
-                                <p>Projects Completed</p>
-                            </div>
-                            <div class="stat-item">
-                                <h3>30+</h3>
-                                <p>Happy Clients</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+  <div class="team-container">
+    <!-- Card 1 -->
+    <div class="team-card">
+      <img src="../assets/images/fadil.jpg" alt="Muhammad Fadil" class="team-photo" onclick="openModal('fadilModal')" />
+      <h3>Muhammad Fadil</h3>
+      <p class="role">Mahasiswa Universitas Adzkia</p>
+      <p>Mengatur jalannya proyek dan memastikan koordinasi tim berjalan dengan baik.</p>
+    </div>
 
-            <!-- Skills Section -->
-            <section class="skills-section">
-                <h2>My Skills</h2>
-                <p class="section-subtitle">Technologies and tools I work with</p>
-                
-                <div class="skills-categories">
-                    <!-- Frontend Skills -->
-                    <div class="skill-category">
-                        <h3>Frontend Development</h3>
-                        <div class="skills-list">
-                            <div class="skill-item">
-                                <span class="skill-name">HTML5</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 95%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">CSS3 / Sass</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 90%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">JavaScript</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 88%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">React.js</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 85%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Vue.js</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 75%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Card 2 -->
+    <div class="team-card">
+      <img src="../assets/images/afri.jpg" alt="Afriadi Ikhwan" class="team-photo" onclick="openModal('afriadiModal')" />
+      <h3>Afriadi Ikhwan</h3>
+      <p class="role">Mahasiswa Universitas Adzkia</p>
+      <p>Membangun antarmuka web yang interaktif, responsif, dan menarik bagi pengguna.</p>
+    </div>
 
-                    <!-- Backend Skills -->
-                    <div class="skill-category">
-                        <h3>Backend Development</h3>
-                        <div class="skills-list">
-                            <div class="skill-item">
-                                <span class="skill-name">Node.js</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 80%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Express.js</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 82%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">PHP</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 75%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">MySQL</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 85%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">MongoDB</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 78%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Card 3 -->
+    <div class="team-card">
+      <img src="../assets/images/trisha.jpg" alt="Trisha" class="team-photo" onclick="openModal('trishaModal')" />
+      <h3>Trisha Fannia</h3>
+      <p class="role">Mahasiswa Universitas Adzkia</p>
+      <p>Membangun antarmuka web yang interaktif, responsif, dan menarik bagi pengguna.</p>
+    </div>
 
-                    <!-- Tools & Others -->
-                    <div class="skill-category">
-                        <h3>Tools & Others</h3>
-                        <div class="skills-list">
-                            <div class="skill-item">
-                                <span class="skill-name">Git & GitHub</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 90%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Figma</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 85%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Responsive Design</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 95%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">RESTful API</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 88%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <span class="skill-name">Agile/Scrum</span>
-                                <div class="skill-bar">
-                                    <div class="skill-progress" style="width: 80%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+     <!-- Card 4 -->
+    <div class="team-card">
+      <img src="../assets/images/raufa.jpg" alt="raufa" class="team-photo" onclick="openModal('raufaModal')" />
+      <h3>Raufa</h3>
+      <p class="role">Mahasiswa Universitas Adzkia</p>
+      <p>Membangun antarmuka web yang interaktif, responsif, dan menarik bagi pengguna.</p>
+    </div>
 
-            <!-- Experience Section -->
-            <section class="experience-section">
-                <h2>Experience</h2>
-                <p class="section-subtitle">My professional journey</p>
-                
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">2023 - Present</div>
-                        <div class="timeline-content">
-                            <h3>Senior Web Developer</h3>
-                            <h4>Tech Company Inc.</h4>
-                            <p>Leading frontend development team, architecting scalable web applications, and mentoring junior developers. Implemented modern CI/CD pipelines and improved code quality standards.</p>
-                        </div>
-                    </div>
+  </div>
+</section>
 
-                    <div class="timeline-item">
-                        <div class="timeline-date">2021 - 2023</div>
-                        <div class="timeline-content">
-                            <h3>Full Stack Developer</h3>
-                            <h4>Digital Agency XYZ</h4>
-                            <p>Developed and maintained multiple client websites and web applications. Worked with cross-functional teams to deliver high-quality solutions on time and within budget.</p>
-                        </div>
-                    </div>
+<!-- ===== MODAL BIODATA ===== -->
+<div id="fadilModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('fadilModal')">&times;</span>
+    <img src="../assets/images/fadil.jpg" alt="Muhammad Fadil" class="modal-photo" />
+    <h3>Muhammad Fadil</h3>
+    <p><strong>Pendidikan:</strong> Mahasiswa Universitas Adzkia</p>
+    <p><strong>Email:</strong>m.fadil10504@gmail.com</p>
+    <p><strong>Keahlian:</strong> HTML, CSS, Python (dasar), Microsoft Word & PowerPoint, kerja tim, komunikasi.</p>
+     <p><strong>Visi:</strong>Menjadi pribadi berilmu, berintegritas, dan bermanfaat.</p>
+     <p><strong>Misi:</strong> Terus mengembangkan keterampilan, bersikap jujur dan bertanggung jawab, serta berkontribusi positif.</p>
+  </div>
+</div>
 
-                    <div class="timeline-item">
-                        <div class="timeline-date">2019 - 2021</div>
-                        <div class="timeline-content">
-                            <h3>Junior Web Developer</h3>
-                            <h4>Startup ABC</h4>
-                            <p>Started my professional journey by building responsive websites and learning best practices in web development. Contributed to various projects and gained hands-on experience.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
+<div id="afriadiModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('afriadiModal')">&times;</span>
+    <img src="../assets/images/afri.jpg" alt="Afriadi Ikhwan" class="modal-photo" />
+    <h3>Afriadi Ikhwan</h3>
+    <p><strong>Pendidikan:</strong> Mahasiswa Universitas Adzkia</p>
+    <p><strong>Email:</strong>afriadiikhwan9@gmail.com</p>
+    <p><strong>Keahlian:</strong> HTML, CSS, Python (dasar), Microsoft Word & PowerPoint, kerja tim, komunikasi.</p>
+     <p><strong>Visi:</strong>Menjadi pribadi berilmu, berintegritas, dan bermanfaat.</p>
+     <p><strong>Misi:</strong> Terus mengembangkan keterampilan, bersikap jujur dan bertanggung jawab, serta berkontribusi positif.</p>
+  </div>
+</div>
 
-            <!-- Education Section -->
-            <section class="education-section">
-                <h2>Education</h2>
-                <p class="section-subtitle">Academic background</p>
-                
-                <div class="education-grid">
-                    <div class="education-item">
-                        <div class="education-icon">🎓</div>
-                        <h3>Bachelor of Computer Science</h3>
-                        <h4>University Name</h4>
-                        <p class="education-date">2015 - 2019</p>
-                        <p>Focused on software engineering, web technologies, and database management. Graduated with honors.</p>
-                    </div>
+<div id="trishaModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('trishaModal')">&times;</span>
+    <img src="../assets/images/trisha.jpg" alt="Trisha Fannia" class="modal-photo" />
+    <h3>Trisha Fannia</h3>
+    <p><strong>Pendidikan:</strong> Mahasiswa Universitas Adzkia</p>
+    <p><strong>Email:</strong>trishafannia@gmail.com</p>
+    <p><strong>Keahlian:</strong> HTML, CSS, Python (dasar), Microsoft Word & PowerPoint, kerja tim, komunikasi.</p>
+     <p><strong>Visi:</strong>Menjadi pribadi berilmu, berintegritas, dan bermanfaat.</p>
+     <p><strong>Misi:</strong> Terus mengembangkan keterampilan, bersikap jujur dan bertanggung jawab, serta berkontribusi positif.</p>
+  </div>
+</div>
 
-                    <div class="education-item">
-                        <div class="education-icon">📜</div>
-                        <h3>Web Development Bootcamp</h3>
-                        <h4>Coding Academy</h4>
-                        <p class="education-date">2018</p>
-                        <p>Intensive 12-week program covering full-stack web development, including modern frameworks and best practices.</p>
-                    </div>
-                </div>
-            </section>
 
-            <!-- Interests Section -->
-            <section class="interests-section">
-                <h2>Interests & Hobbies</h2>
-                <p class="section-subtitle">What I enjoy outside of work</p>
-                
-                <div class="interests-grid">
-                    <div class="interest-item">
-                        <div class="interest-icon">💻</div>
-                        <h3>Coding</h3>
-                        <p>Love exploring new technologies and building side projects</p>
-                    </div>
-                    <div class="interest-item">
-                        <div class="interest-icon">📚</div>
-                        <h3>Reading</h3>
-                        <p>Tech blogs, documentation, and programming books</p>
-                    </div>
-                    <div class="interest-item">
-                        <div class="interest-icon">🎮</div>
-                        <h3>Gaming</h3>
-                        <p>Strategy games and puzzle solving</p>
-                    </div>
-                    <div class="interest-item">
-                        <div class="interest-icon">☕</div>
-                        <h3>Coffee</h3>
-                        <p>Specialty coffee enthusiast and home brewing</p>
-                    </div>
-                    <div class="interest-item">
-                        <div class="interest-icon">🏃</div>
-                        <h3>Fitness</h3>
-                        <p>Running, gym, and staying healthy</p>
-                    </div>
-                    <div class="interest-item">
-                        <div class="interest-icon">✈️</div>
-                        <h3>Travel</h3>
-                        <p>Exploring new places and cultures</p>
-                    </div>
-                </div>
+<div id="raufaModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('raufaModal')">&times;</span>
+    <img src="../assets/images/raufa.jpg" alt="raufa" class="modal-photo" />
+    <h3>Raufa</h3>
+    <p><strong>Pendidikan:</strong> Mahasiswa Universitas Adzkia</p>
+    <p><strong>Email:</strong>raufaadila0@gmail.com</p>
+    <p><strong>Keahlian:</strong> HTML, CSS, Python (dasar), Microsoft Word & PowerPoint, kerja tim, komunikasi.</p>
+     <p><strong>Visi:</strong>Menjadi pribadi berilmu, berintegritas, dan bermanfaat.</p>
+     <p><strong>Misi:</strong> Terus mengembangkan keterampilan, bersikap jujur dan bertanggung jawab, serta berkontribusi positif.</p>
+  </div>
+</div>
+
+
             </section>
 
             <!-- CTA Section -->

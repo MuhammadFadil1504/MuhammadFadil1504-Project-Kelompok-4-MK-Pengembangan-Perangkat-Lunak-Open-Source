@@ -1312,6 +1312,200 @@ button {
     animation: spin 1s linear infinite;
 }
 
+.about {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+/* Button */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .slide {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .slide img {
+    width: 100%;
+    max-width: 250px;
+  }
+
+  .desc {
+    text-align: center;
+  }
+}
 @keyframes spin {
     to { transform: rotate(360deg); }
+}
+
+/* ===== OUR TEAM SECTION ===== */
+.our-team {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.our-team h2 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.our-team h2::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #007bff, #00c6ff);
+  margin: 10px auto 0;
+  border-radius: 2px;
+}
+
+/* ===== GRID CONTAINER ===== */
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  justify-items: center;
+}
+
+/* ===== TEAM CARD ===== */
+.team-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.team-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== IMAGE ===== */
+.team-photo {
+  width: 100%;
+  height: 280px;
+  border-radius: 15px;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+/* ===== TEXT ===== */
+.team-card h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 10px 0 5px;
+}
+
+.team-card .role {
+  font-size: 1rem;
+  color: #00c6ff;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.team-card .desc {
+  font-size: 0.95rem;
+  color: #ddd;
+  line-height: 1.5;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .team-container {
+    grid-template-columns: 1fr;
+  }
+
+  .team-card {
+    max-width: 90%;
+  }
+
+  .team-photo {
+    height: 240px;
+  }
+}
+
+/* Modal base */
+.modal {
+  display: none; /* Tersembunyi dulu */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+
+/* Konten modal */
+.modal-content {
+  background: #fff;
+  color: #000;
+  border-radius: 15px;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  animation: fadeIn 0.3s ease;
+  overflow-y: auto;
+}
+
+.modal-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+/* Tombol close */
+.close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #555;
+}
+
+/* Animasi */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Responsif */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 90%;
+    padding: 20px;
+  }
 }
