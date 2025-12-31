@@ -4,12 +4,522 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="About me - Learn more about my background and skills">
-    <title>About US</title>
+    <title>About Us - Digital Groups</title>
     
-    <!-- Stylesheets -->
-    <link rel="stylesheet" href="../assets/css/variables.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <style>
+        /* ===== CSS Variables ===== */
+        :root {
+            /* Light Mode Colors */
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #f3f4f6;
+            --border-color: #e5e7eb;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-md: rgba(0, 0, 0, 0.15);
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Mode Colors */
+            --primary-color: #818cf8;
+            --secondary-color: #a78bfa;
+            --accent-color: #f472b6;
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+            --bg-primary: #111827;
+            --bg-secondary: #1f2937;
+            --bg-tertiary: #374151;
+            --border-color: #374151;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-md: rgba(0, 0, 0, 0.5);
+        }
+
+        /* ===== Base Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== Navigation ===== */
+        .navbar {
+            background: var(--bg-primary);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        /* Dark Mode Toggle */
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px var(--shadow-md);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* ===== Page Header ===== */
+        .page-header {
+            background: var(--gradient-1);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== Main Content ===== */
+        .page-content {
+            padding: 80px 0;
+        }
+
+        /* ===== Team Section ===== */
+        .our-team h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .team-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px var(--shadow-md);
+        }
+
+        .team-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .team-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 5px solid var(--bg-tertiary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .team-photo:hover {
+            transform: scale(1.1);
+            border-color: var(--primary-color);
+        }
+
+        .team-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .role {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .team-card p:last-child {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* ===== Modal Styles ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: var(--bg-secondary);
+            margin: 5% auto;
+            padding: 2.5rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            box-shadow: 0 20px 60px var(--shadow-md);
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: var(--text-secondary);
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+
+        .modal-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 1.5rem;
+            border: 6px solid var(--primary-color);
+        }
+
+        .modal-content h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .modal-content p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .modal-content p strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        /* ===== CTA Section ===== */
+        .cta-section {
+            background: var(--gradient-1);
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .cta-content h2 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* ===== Buttons ===== */
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-large {
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            background: var(--bg-secondary);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--bg-primary);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .our-team h2 {
+                font-size: 2rem;
+            }
+
+            .cta-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -18,12 +528,17 @@
             <div class="nav-brand">Digital Groups</div>
             <ul class="nav-menu">
                 <li><a href="../index.html">Home</a></li>
-                <li><a href="about.html" class="active">About US</a></li>
+                <li><a href="about.html" class="active">About</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="blog.html">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </li>
             </ul>
-            <div class="hamburger">
+            <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -39,111 +554,106 @@
         </div>
     </header>
 
-  <!-- Main Content -->
+    <!-- Main Content -->
     <main class="page-content">
         <div class="container">
             <!-- About Section -->
-        <section class="our-team">
-  <h2>Team Kami</h2>
+            <section class="our-team">
+                <h2>Tim Kami</h2>
 
-  <div class="team-container">
-    <!-- Card 1 -->
-    <div class="team-card">
-      <img src="../assets/images/fadil.jpg" alt="Muhammad Fadil" class="team-photo" onclick="openModal('fadilModal')" />
-      <h3>Muhammad Fadil</h3>
-      <p class="role">Mahasiswa Universitas Adzkia</p>
-      <p>Mengatur jalannya proyek dan memastikan koordinasi tim berjalan dengan baik.</p>
-    </div>
+                <div class="team-container">
+                    <!-- Card 1 -->
+                    <div class="team-card">
+                        <img src="../assets/images/fadil.jpg" alt="Muhammad Fadil" class="team-photo" onclick="openModal('fadilModal')" />
+                        <h3>Muhammad Fadil</h3>
+                        <p class="role">Mahasiswa Universitas Adzkia</p>
+                        <p>Mengatur jalannya proyek dan memastikan koordinasi tim berjalan dengan baik.</p>
+                    </div>
 
-    <!-- Card 2 -->
-    <div class="team-card">
-      <img src="../assets/images/afri.jpg" alt="Afriadi Ikhwan" class="team-photo" onclick="openModal('afriadiModal')" />
-      <h3>Afriadi Ikhwan</h3>
-      <p class="role">Mahasiswa Universitas Adzkia</p>
-      <p>Membangun antarmuka web yang interaktif, responsif, dan menarik bagi pengguna.</p>
-    </div>
+                    <!-- Card 2 -->
+                    <div class="team-card">
+                        <img src="../assets/images/afri.jpg" alt="Afriadi Ikhwan" class="team-photo" onclick="openModal('afriadiModal')" />
+                        <h3>Afriadi Ikhwan</h3>
+                        <p class="role">Mahasiswa Universitas Adzkia</p>
+                        <p>Membangun antarmuka web yang interaktif, responsif, dan menarik bagi pengguna.</p>
+                    </div>
 
-    <!-- Card 3 -->
-    <div class="team-card">
-      <img src="../assets/images/trisha.jpg" alt="Trisha" class="team-photo" onclick="openModal('trishaModal')" />
-      <h3>Trisha Fannia</h3>
-      <p class="role">Mahasiswa Universitas Adzkia</p>
-      <p>Membangun antarmuka web yang interaktif, responsif, dan menarik bagi pengguna.</p>
-    </div>
+                    <!-- Card 3 -->
+                    <div class="team-card">
+                        <img src="../assets/images/trisha.jpg" alt="Trisha" class="team-photo" onclick="openModal('trishaModal')" />
+                        <h3>Trisha Fannia</h3>
+                        <p class="role">Mahasiswa Universitas Adzkia</p>
+                        <p>Membangun antarmuka web yang interaktif, responsif, dan menarik bagi pengguna.</p>
+                    </div>
 
-     <!-- Card 4 -->
-    <div class="team-card">
-      <img src="../assets/images/raufa.jpg" alt="raufa" class="team-photo" onclick="openModal('raufaModal')" />
-      <h3>Raufa</h3>
-      <p class="role">Mahasiswa Universitas Adzkia</p>
-      <p>Membangun antarmuka web yang interaktif, responsif, dan menarik bagi pengguna.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ===== MODAL BIODATA ===== -->
-<div id="fadilModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('fadilModal')">&times;</span>
-    <img src="../assets/images/fadil.jpg" alt="Muhammad Fadil" class="modal-photo" />
-    <h3>Muhammad Fadil</h3>
-    <p><strong>Pendidikan:</strong> Mahasiswa Universitas Adzkia</p>
-    <p><strong>Email:</strong>m.fadil10504@gmail.com</p>
-    <p><strong>Keahlian:</strong> HTML, CSS, Python (dasar), Microsoft Word & PowerPoint, kerja tim, komunikasi.</p>
-     <p><strong>Visi:</strong>Menjadi pribadi berilmu, berintegritas, dan bermanfaat.</p>
-     <p><strong>Misi:</strong> Terus mengembangkan keterampilan, bersikap jujur dan bertanggung jawab, serta berkontribusi positif.</p>
-  </div>
-</div>
-
-<div id="afriadiModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('afriadiModal')">&times;</span>
-    <img src="../assets/images/afri.jpg" alt="Afriadi Ikhwan" class="modal-photo" />
-    <h3>Afriadi Ikhwan</h3>
-    <p><strong>Pendidikan:</strong> Mahasiswa Universitas Adzkia</p>
-    <p><strong>Email:</strong>afriadiikhwan9@gmail.com</p>
-    <p><strong>Keahlian:</strong> HTML, CSS, Python (dasar), Microsoft Word & PowerPoint, kerja tim, komunikasi.</p>
-     <p><strong>Visi:</strong>Menjadi pribadi berilmu, berintegritas, dan bermanfaat.</p>
-     <p><strong>Misi:</strong> Terus mengembangkan keterampilan, bersikap jujur dan bertanggung jawab, serta berkontribusi positif.</p>
-  </div>
-</div>
-
-<div id="trishaModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('trishaModal')">&times;</span>
-    <img src="../assets/images/trisha.jpg" alt="Trisha Fannia" class="modal-photo" />
-    <h3>Trisha Fannia</h3>
-    <p><strong>Pendidikan:</strong> Mahasiswa Universitas Adzkia</p>
-    <p><strong>Email:</strong>trishafannia@gmail.com</p>
-    <p><strong>Keahlian:</strong> HTML, CSS, Python (dasar), Microsoft Word & PowerPoint, kerja tim, komunikasi.</p>
-     <p><strong>Visi:</strong>Menjadi pribadi berilmu, berintegritas, dan bermanfaat.</p>
-     <p><strong>Misi:</strong> Terus mengembangkan keterampilan, bersikap jujur dan bertanggung jawab, serta berkontribusi positif.</p>
-  </div>
-</div>
-
-
-<div id="raufaModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('raufaModal')">&times;</span>
-    <img src="../assets/images/raufa.jpg" alt="raufa" class="modal-photo" />
-    <h3>Raufa</h3>
-    <p><strong>Pendidikan:</strong> Mahasiswa Universitas Adzkia</p>
-    <p><strong>Email:</strong>raufaadila0@gmail.com</p>
-    <p><strong>Keahlian:</strong> HTML, CSS, Python (dasar), Microsoft Word & PowerPoint, kerja tim, komunikasi.</p>
-     <p><strong>Visi:</strong>Menjadi pribadi berilmu, berintegritas, dan bermanfaat.</p>
-     <p><strong>Misi:</strong> Terus mengembangkan keterampilan, bersikap jujur dan bertanggung jawab, serta berkontribusi positif.</p>
-  </div>
-</div>
-
-
+                    <!-- Card 4 -->
+                    <div class="team-card">
+                        <img src="../assets/images/raufa.jpg" alt="raufa" class="team-photo" onclick="openModal('raufaModal')" />
+                        <h3>Raufa</h3>
+                        <p class="role">Mahasiswa Universitas Adzkia</p>
+                        <p>Membangun antarmuka web yang interaktif, responsif, dan menarik bagi pengguna.</p>
+                    </div>
+                </div>
             </section>
+
+            <!-- ===== MODAL BIODATA ===== -->
+            <div id="fadilModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('fadilModal')">&times;</span>
+                    <img src="../assets/images/fadil.jpg" alt="Muhammad Fadil" class="modal-photo" />
+                    <h3>Muhammad Fadil</h3>
+                    <p><strong>Pendidikan:</strong> Mahasiswa Universitas Adzkia</p>
+                    <p><strong>Email:</strong> m.fadil10504@gmail.com</p>
+                    <p><strong>Keahlian:</strong> HTML, CSS, Python (dasar), Microsoft Word & PowerPoint, kerja tim, komunikasi.</p>
+                    <p><strong>Visi:</strong> Menjadi pribadi berilmu, berintegritas, dan bermanfaat.</p>
+                    <p><strong>Misi:</strong> Terus mengembangkan keterampilan, bersikap jujur dan bertanggung jawab, serta berkontribusi positif.</p>
+                </div>
+            </div>
+
+            <div id="afriadiModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('afriadiModal')">&times;</span>
+                    <img src="../assets/images/afri.jpg" alt="Afriadi Ikhwan" class="modal-photo" />
+                    <h3>Afriadi Ikhwan</h3>
+                    <p><strong>Pendidikan:</strong> Mahasiswa Universitas Adzkia</p>
+                    <p><strong>Email:</strong> afriadiikhwan9@gmail.com</p>
+                    <p><strong>Keahlian:</strong> HTML, CSS, Python (dasar), Microsoft Word & PowerPoint, kerja tim, komunikasi.</p>
+                    <p><strong>Visi:</strong> Menjadi pribadi berilmu, berintegritas, dan bermanfaat.</p>
+                    <p><strong>Misi:</strong> Terus mengembangkan keterampilan, bersikap jujur dan bertanggung jawab, serta berkontribusi positif.</p>
+                </div>
+            </div>
+
+            <div id="trishaModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('trishaModal')">&times;</span>
+                    <img src="../assets/images/trisha.jpg" alt="Trisha Fannia" class="modal-photo" />
+                    <h3>Trisha Fannia</h3>
+                    <p><strong>Pendidikan:</strong> Mahasiswa Universitas Adzkia</p>
+                    <p><strong>Email:</strong> trishafannia@gmail.com</p>
+                    <p><strong>Keahlian:</strong> HTML, CSS, Python (dasar), Microsoft Word & PowerPoint, kerja tim, komunikasi.</p>
+                    <p><strong>Visi:</strong> Menjadi pribadi berilmu, berintegritas, dan bermanfaat.</p>
+                    <p><strong>Misi:</strong> Terus mengembangkan keterampilan, bersikap jujur dan bertanggung jawab, serta berkontribusi positif.</p>
+                </div>
+            </div>
+
+            <div id="raufaModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('raufaModal')">&times;</span>
+                    <img src="../assets/images/raufa.jpg" alt="raufa" class="modal-photo" />
+                    <h3>Raufa</h3>
+                    <p><strong>Pendidikan:</strong> Mahasiswa Universitas Adzkia</p>
+                    <p><strong>Email:</strong> raufaadila0@gmail.com</p>
+                    <p><strong>Keahlian:</strong> HTML, CSS, Python (dasar), Microsoft Word & PowerPoint, kerja tim, komunikasi.</p>
+                    <p><strong>Visi:</strong> Menjadi pribadi berilmu, berintegritas, dan bermanfaat.</p>
+                    <p><strong>Misi:</strong> Terus mengembangkan keterampilan, bersikap jujur dan bertanggung jawab, serta berkontribusi positif.</p>
+                </div>
+            </div>
 
             <!-- CTA Section -->
             <section class="cta-section">
                 <div class="cta-content">
                     <h2>Tertarik Bekerja Sama?</h2>
-                    <p>Mari kita diskusikan bagaimana kami dapat memebantu mewujudkan proyek anda.</p>
+                    <p>Mari kita diskusikan bagaimana kami dapat membantu mewujudkan proyek Anda.</p>
                     <a href="contact.html" class="btn btn-primary btn-large">Hubungi Kami</a>
                 </div>
             </section>
@@ -155,12 +665,12 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>Your Name</h3>
-                    <p>Pengembangan & Desain Web yang bersemangat menciptakan pengalaman digital yang indah.</p>
+                    <h3>Digital Groups</h3>
+                    <p>Pengembang & Desainer Web yang bersemangat menciptakan pengalaman digital yang indah.</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Quick Links</h3>
+                    <h3>Tautan Cepat</h3>
                     <ul class="footer-links">
                         <li><a href="../index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
@@ -171,22 +681,115 @@
                 </div>
                 
                 <div class="footer-section">
-                    <h3>Connect</h3>
+                    <h3>Koneksi</h3>
                     <div class="social-links">
-                         <a href="https://github.com/MuhammadFadil1504/MuhammadFadil1504-Project-Kelompok-4-MK-Pengembangan-Perangkat-Lunak-Open-Source.git" target="_blank" rel="noopener noreferrer">GitHub</a>
-
+                        <a href="https://github.com/MuhammadFadil1504" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://www.instagram.com/afriadiikhn09" target="_blank" rel="noopener noreferrer">Instagram</a>
+                        <a href="mailto:afriadiikhwan9@gmail.com">Email</a>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2024 Your Name. All rights reserved.</p>
+                <p>&copy; 2025 Digital Groups. All rights reserved.</p>
+                <p>Dibuat dengan ❤️ dan ☕</p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript Files -->
-    <script src="../assets/js/navigation.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const themeIcon = document.querySelector('.theme-icon');
+
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+
+        themeToggle.addEventListener('click', function() {
+            let theme = html.getAttribute('data-theme');
+            let newTheme = theme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            
+            const spans = hamburger.querySelectorAll('span');
+            if (navMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.style.display = 'none';
+                });
+                document.body.style.overflow = "auto";
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.pageYOffset > 100) {
+                navbar.style.boxShadow = '0 4px 20px var(--shadow-md)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px var(--shadow)';
+            }
+        });
+    </script>
 </body>
 </html>
