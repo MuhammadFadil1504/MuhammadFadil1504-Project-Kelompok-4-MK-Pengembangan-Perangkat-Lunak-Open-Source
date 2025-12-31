@@ -370,12 +370,68 @@ if (yearElement && yearElement.textContent.includes('2024')) {
     yearElement.textContent = yearElement.textContent.replace('2024', currentYear);
 }
 
-// ==================== EXPORT FOR MODULES (if needed) ====================
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = {
-        debounce,
-        throttle,
-        animateCounter,
-        typeWriter
-    };
+
+const slides = document.querySelectorAll('.slide');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
+
+let current = 0;
+let isAnimating = false;
+
+function showSlide(nextIndex, direction) {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const currentSlide = slides[current];
+    const nextSlide = slides[nextIndex];
+
+    // Reset class
+    slides.forEach(slide => {
+        slide.classList.remove('active', 'exit-left', 'exit-right');
+    });
+
+    // Tentukan arah keluar
+    if (direction === 'next') {
+        currentSlide.classList.add('exit-left');
+        nextSlide.style.transform = 'translateX(100%)';
+    } else {
+        currentSlide.classList.add('exit-right');
+        nextSlide.style.transform = 'translateX(-100%)';
+    }
+
+    // Aktifkan slide baru
+    setTimeout(() => {
+        nextSlide.classList.add('active');
+        nextSlide.style.transform = 'translateX(0)';
+        current = nextIndex;
+    }, 20);
+
+    setTimeout(() => {
+        isAnimating = false;
+    }, 500);
 }
+
+nextBtn.addEventListener('click', () => {
+    const nextIndex = (current + 1) % slides.length;
+    showSlide(nextIndex, 'next');
+});
+
+prevBtn.addEventListener('click', () => {
+    const prevIndex = (current - 1 + slides.length) % slides.length;
+    showSlide(prevIndex, 'prev');
+});
+
+function openModal(id) {
+  document.getElementById(id).style.display = "flex";
+}
+
+function closeModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+// Klik di luar modal untuk menutup
+window.onclick = function(event) {
+  if (event.target.classList.contains('modal')) {
+    event.target.style.display = "none";
+  }
+};
