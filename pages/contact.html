@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact me - Get in touch for projects and collaborations">
     <title>Contact - Digital Groups</title>
     
     <style>
@@ -27,6 +28,9 @@
         }
 
         [data-theme="dark"] {
+            --primary-color: #818cf8;
+            --secondary-color: #a78bfa;
+            --accent-color: #f472b6;
             --text-primary: #f9fafb;
             --text-secondary: #d1d5db;
             --bg-primary: #111827;
@@ -114,6 +118,24 @@
             width: 100%;
         }
 
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px var(--shadow-md);
+        }
+
         .hamburger {
             display: none;
             flex-direction: column;
@@ -196,89 +218,13 @@
             }
         }
 
-        /* Contact Quick Info */
-        .contact-quick-info {
-            background: var(--bg-primary);
+        /* Contact Info Section */
+        .contact-info-section {
             padding: 60px 0;
-            margin-top: -40px;
-            position: relative;
-            z-index: 2;
         }
 
-        .quick-info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .quick-info-card {
-            background: var(--bg-secondary);
-            padding: 2rem;
-            border-radius: 20px;
+        .contact-info-section h2 {
             text-align: center;
-            box-shadow: 0 10px 30px var(--shadow);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .quick-info-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px var(--shadow-md);
-            border-color: var(--primary-color);
-        }
-
-        .quick-info-icon {
-            width: 70px;
-            height: 70px;
-            margin: 0 auto 1.5rem;
-            background: var(--gradient-1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
-        }
-
-        .quick-info-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-
-        .quick-info-card p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .quick-info-card a {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .quick-info-card a:hover {
-            color: var(--primary-dark);
-        }
-
-        /* Main Content */
-        .contact-content {
-            padding: 60px 0;
-        }
-
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        /* Team Section */
-        .team-section h2 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
             background: var(--gradient-1);
@@ -287,36 +233,44 @@
             background-clip: text;
         }
 
-        .team-section > p {
+        .contact-info-section > p {
+            text-align: center;
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            max-width: 800px;
+            margin: 0 auto 3rem;
             line-height: 1.8;
+            font-size: 1.1rem;
         }
 
+        /* Team Cards Grid */
         .team-cards-grid {
             display: grid;
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 2.5rem 0;
         }
 
+        /* Team Member Card */
         .team-member-card {
             background: var(--bg-secondary);
-            border-radius: 20px;
+            border-radius: 16px;
             padding: 2rem;
-            box-shadow: 0 5px 20px var(--shadow);
+            box-shadow: 0 4px 20px var(--shadow);
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
 
         .team-member-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 10px 30px var(--shadow-md);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px var(--shadow-md);
             border-color: var(--primary-color);
         }
 
+        /* Member Header */
         .member-header {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1rem;
             margin-bottom: 1.5rem;
             padding-bottom: 1rem;
             border-bottom: 2px solid var(--border-color);
@@ -331,47 +285,58 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.75rem;
             font-weight: bold;
             flex-shrink: 0;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
         }
 
         .member-header h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--text-primary);
+            margin: 0;
+            font-weight: 600;
         }
 
+        /* Member Details */
         .member-details {
             display: flex;
             flex-direction: column;
-            gap: 0.8rem;
+            gap: 1rem;
         }
 
+        /* Detail Item */
         .detail-item {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 0.5rem;
+            flex-direction: column;
+            gap: 0.25rem;
+            padding: 0.75rem;
+            background-color: var(--bg-tertiary);
             border-radius: 8px;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .detail-item:hover {
-            background-color: var(--bg-tertiary);
+            background-color: var(--bg-primary);
+            transform: translateX(5px);
         }
 
-        .detail-icon {
-            font-size: 1.2rem;
-            width: 24px;
-            text-align: center;
+        .detail-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .detail-item a {
             color: var(--primary-color);
             text-decoration: none;
             font-size: 0.95rem;
+            word-break: break-all;
             transition: color 0.3s ease;
+            margin-left: 1.75rem;
         }
 
         .detail-item a:hover {
@@ -379,8 +344,80 @@
             text-decoration: underline;
         }
 
-        /* Contact Form */
-        .form-section h2 {
+        .detail-item span:not(.detail-label) {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-left: 1.75rem;
+        }
+
+        /* Availability Section */
+        .availability-section {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 3rem;
+            box-shadow: 0 5px 20px var(--shadow);
+            text-align: center;
+        }
+
+        .availability-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .availability-status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .status-indicator.available {
+            background: var(--success-color);
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        .status-text {
+            font-weight: 600;
+            color: var(--success-color);
+            font-size: 1.1rem;
+        }
+
+        .availability-section p {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        /* Contact Form Section */
+        .contact-form-section {
+            background: var(--bg-secondary);
+            padding: 60px 0;
+            margin-top: 60px;
+        }
+
+        .contact-form-section h2 {
+            text-align: center;
             font-size: 2.5rem;
             margin-bottom: 1rem;
             background: var(--gradient-2);
@@ -389,17 +426,29 @@
             background-clip: text;
         }
 
-        .form-section > p {
+        .contact-form-section > p {
+            text-align: center;
             color: var(--text-secondary);
-            margin-bottom: 2rem;
+            max-width: 700px;
+            margin: 0 auto 3rem;
             line-height: 1.8;
+            font-size: 1.1rem;
         }
 
         .contact-form {
-            background: var(--bg-secondary);
-            padding: 2.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-primary);
+            padding: 3rem;
             border-radius: 20px;
-            box-shadow: 0 10px 30px var(--shadow);
+            box-shadow: 0 10px 40px var(--shadow);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group {
@@ -426,7 +475,7 @@
             border-radius: 12px;
             font-size: 1rem;
             font-family: inherit;
-            background: var(--bg-primary);
+            background: var(--bg-secondary);
             color: var(--text-primary);
             transition: all 0.3s ease;
         }
@@ -444,33 +493,40 @@
             min-height: 150px;
         }
 
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
         }
 
-        .btn-submit {
-            background: var(--gradient-1);
-            color: white;
-            padding: 1.2rem 3rem;
+        .btn {
+            padding: 1rem 2rem;
             border: none;
             border-radius: 50px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 100%;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
         }
 
-        .btn-submit:hover {
+        .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
         }
 
-        .btn-submit:active {
-            transform: translateY(-1px);
+        .btn-large {
+            width: 100%;
+            padding: 1.2rem 2rem;
+            font-size: 1.1rem;
         }
 
         .form-message {
@@ -495,9 +551,7 @@
 
         /* FAQ Section */
         .faq-section {
-            background: var(--bg-secondary);
             padding: 80px 0;
-            margin-top: 60px;
         }
 
         .faq-section h2 {
@@ -519,7 +573,7 @@
         }
 
         .faq-item {
-            background: var(--bg-primary);
+            background: var(--bg-secondary);
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 5px 20px var(--shadow);
@@ -537,15 +591,6 @@
             font-size: 1.2rem;
             margin-bottom: 1rem;
             color: var(--text-primary);
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-        }
-
-        .faq-item h3::before {
-            content: '❓';
-            font-size: 1.5rem;
-            flex-shrink: 0;
         }
 
         .faq-item p {
@@ -625,9 +670,8 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-                gap: 3rem;
+            .team-cards-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -661,7 +705,7 @@
                 font-size: 1.1rem;
             }
 
-            .quick-info-grid {
+            .team-cards-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -673,9 +717,8 @@
                 grid-template-columns: 1fr;
             }
 
-            .member-header {
-                flex-direction: column;
-                text-align: center;
+            .contact-form {
+                padding: 2rem;
             }
         }
 
@@ -691,6 +734,16 @@
             .contact-form {
                 padding: 1.5rem;
             }
+
+            .member-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .detail-item a,
+            .detail-item span:not(.detail-label) {
+                margin-left: 0;
+            }
         }
     </style>
 </head>
@@ -699,11 +752,12 @@
         <div class="container">
             <div class="nav-brand">Digital Groups</div>
             <ul class="nav-menu" id="navMenu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#contact" class="active">Contact</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+                <li><button class="theme-toggle" id="themeToggle"><span class="theme-icon">🌙</span></button></li>
             </ul>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -715,255 +769,279 @@
 
     <header class="page-header">
         <div class="container">
-            <h1>Mari Terhubung</h1>
+            <h1>Hubungi Kami</h1>
             <p>Siap untuk memulai proyek Anda? Hubungi kami dan mari wujudkan ide digital Anda menjadi kenyataan!</p>
         </div>
     </header>
 
-    <section class="contact-quick-info">
-        <div class="container">
-            <div class="quick-info-grid">
-                <div class="quick-info-card">
-                    <div class="quick-info-icon">📧</div>
-                    <h3>Email Kami</h3>
-                    <p>Kirim email kapan saja</p>
-                    <a href="mailto:afriadiikhwan9@gmail.com">afriadiikhwan9@gmail.com</a>
-                </div>
-                <div class="quick-info-card">
-                    <div class="quick-info-icon">📱</div>
-                    <h3>Telepon</h3>
-                    <p>Senin - Jumat, 9:00 - 18:00</p>
-                    <a href="tel:+6283181424595">+62 831-8142-4595</a>
-                </div>
-                <div class="quick-info-card">
-                    <div class="quick-info-icon">📍</div>
-                    <h3>Lokasi</h3>
-                    <p>Temukan kami di</p>
-                    <a href="#">Padang, Indonesia</a>
-                </div>
-                <div class="quick-info-card">
-                    <div class="quick-info-icon">⏱️</div>
-                    <h3>Waktu Respons</h3>
-                    <p>Biasanya dalam</p>
-                    <a href="#">24 jam</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <main class="contact-content">
-        <div class="container">
-            <div class="content-grid">
-                <div class="team-section">
-                    <h2>Tim Kami</h2>
-                    <p>Kenali tim profesional kami yang siap membantu mewujudkan visi digital Anda. Kami terdiri dari developer dan designer berpengalaman.</p>
-                    
-                    <div class="team-cards-grid">
-                        <div class="team-member-card">
-                            <div class="member-header">
-                                <div class="member-avatar">AI</div>
-                                <h3>Afriadi Ikhwan</h3>
-                            </div>
-                            <div class="member-details">
-                                <div class="detail-item">
-                                    <span class="detail-icon">📧</span>
-                                    <a href="mailto:afriadiikhwan9@gmail.com">afriadiikhwan9@gmail.com</a>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">📱</span>
-                                    <a href="tel:+6283181424595">+62 831-8142-4595</a>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">💻</span>
-                                    <a href="https://github.com/Afriadiikhwan" target="_blank">GitHub</a>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">📷</span>
-                                    <a href="https://www.instagram.com/afriadiikhn09" target="_blank">Instagram</a>
-                                </div>
-                            </div>
+    <main>
+        <section class="contact-info-section">
+            <div class="container">
+                <h2>Informasi Kontak Tim</h2>
+                <p>Hubungi kami melalui saluran berikut. Kami selalu terbuka untuk mendiskusikan proyek baru, ide kreatif, atau peluang untuk menjadi bagian dari visi Anda.</p>
+                
+                <div class="team-cards-grid">
+                    <!-- Card 1: Afriadi Ikhwan -->
+                    <div class="team-member-card">
+                        <div class="member-header">
+                            <div class="member-avatar">AI</div>
+                            <h3>Afriadi Ikhwan</h3>
                         </div>
-
-                        <div class="team-member-card">
-                            <div class="member-header">
-                                <div class="member-avatar">RA</div>
-                                <h3>Raufa Adila</h3>
+                        <div class="member-details">
+                            <div class="detail-item">
+                                <span class="detail-label">📧 Email:</span>
+                                <a href="mailto:afriadiikhwan9@gmail.com">afriadiikhwan9@gmail.com</a>
                             </div>
-                            <div class="member-details">
-                                <div class="detail-item">
-                                    <span class="detail-icon">📧</span>
-                                    <a href="mailto:raufaadila0@gmail.com">raufaadila0@gmail.com</a>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">📱</span>
-                                    <a href="tel:+6281277401858">+62 812-7740-1858</a>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">📷</span>
-                                    <a href="https://www.instagram.com/raufa_adl" target="_blank">Instagram</a>
-                                </div>
+                            <div class="detail-item">
+                                <span class="detail-label">📱 Phone:</span>
+                                <a href="tel:+6283181424595">+62 831-8142-4595</a>
                             </div>
-                        </div>
-
-                        <div class="team-member-card">
-                            <div class="member-header">
-                                <div class="member-avatar">MF</div>
-                                <h3>M. Fadil</h3>
+                            <div class="detail-item">
+                                <span class="detail-label">📍 Lokasi:</span>
+                                <span>Padang, Indonesia</span>
                             </div>
-                            <div class="member-details">
-                                <div class="detail-item">
-                                    <span class="detail-icon">📧</span>
-                                    <a href="mailto:m.fadil10504@gmail.com">m.fadil10504@gmail.com</a>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">📱</span>
-                                    <a href="tel:+6282177079475">+62 821-7707-9475</a>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">💻</span>
-                                    <a href="https://github.com/MuhammadFadil1504" target="_blank">GitHub</a>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">📷</span>
-                                    <a href="https://www.instagram.com/muhammad_fadil154" target="_blank">Instagram</a>
-                                </div>
+                            <div class="detail-item">
+                                <span class="detail-label">💻 GitHub:</span>
+                                <a href="https://github.com/Afriadiikhwan" target="_blank" rel="noopener noreferrer">Afriadiikhwan</a>
                             </div>
-                        </div>
-
-                        <div class="team-member-card">
-                            <div class="member-header">
-                                <div class="member-avatar">TF</div>
-                                <h3>Trisha Fania</h3>
-                            </div>
-                            <div class="member-details">
-                                <div class="detail-item">
-                                    <span class="detail-icon">📧</span>
-                                    <a href="mailto:trishafania@gmail.com">trishafania@gmail.com</a>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">📱</span>
-                                    <a href="tel:+6282285645612">+62 822-8564-5612</a>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">💻</span>
-                                    <a href="https://github.com/trishafannia" target="_blank">GitHub</a>
-                                </div>
-                                <div class="detail-item">
-                                    <span class="detail-icon">📷</span>
-                                    <a href="https://www.instagram.com/trshfnn__" target="_blank">Instagram</a>
-                                </div>
+                            <div class="detail-item">
+                                <span class="detail-label">📷 Instagram:</span>
+                                <a href="https://www.instagram.com/afriadiikhn09" target="_blank" rel="noopener noreferrer">@afriadiikhn09</a>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Card 2: Raufa Adila -->
+                    <div class="team-member-card">
+                        <div class="member-header">
+                            <div class="member-avatar">RA</div>
+                            <h3>Raufa Adila</h3>
+                        </div>
+                        <div class="member-details">
+                            <div class="detail-item">
+                                <span class="detail-label">📧 Email:</span>
+                                <a href="mailto:raufaadila0@gmail.com">raufaadila0@gmail.com</a>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">📱 Phone:</span>
+                                <a href="tel:+6281277401858">+62 812-7740-1858</a>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">📍 Lokasi:</span>
+                                <span>Padang, Indonesia</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">💻 GitHub:</span>
+                                <a href="#" target="_blank" rel="noopener noreferrer">-</a>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">📷 Instagram:</span>
+                                <a href="https://www.instagram.com/raufa_adl" target="_blank" rel="noopener noreferrer">@raufa_adl</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3: M. Fadil -->
+                    <div class="team-member-card">
+                        <div class="member-header">
+                            <div class="member-avatar">MF</div>
+                            <h3>M. Fadil</h3>
+                        </div>
+                        <div class="member-details">
+                            <div class="detail-item">
+                                <span class="detail-label">📧 Email:</span>
+                                <a href="mailto:m.fadil10504@gmail.com">m.fadil10504@gmail.com</a>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">📱 Phone:</span>
+                                <a href="tel:+6282177079475">+62 821-7707-9475</a>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">📍 Lokasi:</span>
+                                <span>Padang, Indonesia</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">💻 GitHub:</span>
+                                <a href="https://github.com/MuhammadFadil1504" target="_blank" rel="noopener noreferrer">MuhammadFadil1504</a>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">📷 Instagram:</span>
+                                <a href="https://www.instagram.com/muhammad_fadil154" target="_blank" rel="noopener noreferrer">@muhammad_fadil154</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Trisha Fania -->
+                    <div class="team-member-card">
+                        <div class="member-header">
+                            <div class="member-avatar">TF</div>
+                            <h3>Trisha Fania</h3>
+                        </div>
+                        <div class="member-details">
+                            <div class="detail-item">
+                                <span class="detail-label">📧 Email:</span>
+                                <a href="mailto:trishafania@gmail.com">trishafania@gmail.com</a>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">📱 Phone:</span>
+                                <a href="tel:+6282285645612">+62 822-8564-5612</a>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">📍 Lokasi:</span>
+                                <span>Padang, Indonesia</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">💻 GitHub:</span>
+                                <a href="https://github.com/trishafannia" target="_blank" rel="noopener noreferrer">trishafannia</a>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">📷 Instagram:</span>
+                                <a href="https://www.instagram.com/trshfnn__?igsh=ajdiZXV2ZXNpOGZn" target="_blank" rel="noopener noreferrer">@trshfnn__</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <function_calls>
+                    <invoke name="artifacts">
+                    <parameter name="command">update</parameter>
+                    <parameter name="id">modern_contact_page</parameter>
+
+                    <parameter name="old_str">       
                 </div>
+            </div>      
+                </parameter>
 
-                <div class="form-section">
-                    <h2>Kirim Pesan</h2>
-                    <p>Punya pertanyaan atau ingin memulai proyek? Isi formulir di bawah ini dan kami akan segera menghubungi Anda.</p>
-                    
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name">Nama Lengkap <span class="required">*</span></label>
-                                <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email <span class="required">*</span></label>
-                                <input type="email" id="email" name="email" placeholder="your@email.com" required>
-                            </div>
-                        </div>
+            <parameter name="new_str">                   
+             </div>
 
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="phone">Nomor Telepon</label>
-                                <input type="tel" id="phone" name="phone" placeholder="+62 xxx-xxxx-xxxx">
-                            </div>
-                            <div class="form-group">
-                                <label for="subject">Subjek <span class="required">*</span></label>
-                                <input type="text" id="subject" name="subject" placeholder="Tentang apa pesan Anda?" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="projectType">Jenis Proyek</label>
-                            <select id="projectType" name="projectType">
-                                <option value="">Pilih jenis proyek</option>
-                                <option value="website">Website Development</option>
-                                <option value="webapp">Web Application</option>
-                                <option value="mobile">Mobile App</option>
-                                <option value="design">UI/UX Design</option>
-                                <option value="consulting">Consulting</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="budget">Kisaran Anggaran</label>
-                            <select id="budget" name="budget">
-                                <option value="">Pilih anggaran</option>
-                                <option value="small">< $5,000</option>
-                                <option value="medium">$5,000 - $15,000</option>
-                                <option value="large">$15,000 - $50,000</option>
-                                <option value="enterprise">> $50,000</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Pesan <span class="required">*</span></label>
-                            <textarea id="message" name="message" rows="6" placeholder="Ceritakan tentang proyek Anda..." required></textarea>
-                        </div>
-
-                        <button type="submit" class="btn-submit">Kirim Pesan</button>
-
-                        <div id="formSuccess" class="form-message success" style="display: none;">
-                            ✓ Terima kasih! Pesan Anda telah berhasil dikirim. Saya akan segera menghubungi Anda.
-                        </div>
-
-                        <div id="formError" class="form-message error" style="display: none;">
-                            ✗ Oops! Something went wrong. Please try again.
-                        </div>
-                    </form>
+                </div>
+                <div class="availability-section">
+                    <h3>Tersedia</h3>
+                    <div class="availability-status">
+                        <span class="status-indicator available"></span>
+                        <span class="status-text">Saat ini tersedia untuk proyek freelance</span>
+                    </div>
+                    <p>Waktu respons: Biasanya dalam waktu 24 jam</p>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <section class="contact-form-section">
+            <div class="container">
+                <h2>Kirim Pesan</h2>
+                <p>Halo, silakan kirim pesan Anda melalui formulir di bawah ini.</p>
+                
+                <form id="contactForm" class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Nama Lengkap <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" placeholder="" required>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="" required>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Nomor Telepon</label>
+                            <input type="tel" id="phone" name="phone" placeholder="">
+                            <span class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subjek <span class="required">*</span></label>
+                            <input type="text" id="subject" name="subject" placeholder="" required>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectType">Jenis Projek</label>
+                        <select id="projectType" name="projectType">
+                            <option value="">Pilih jenis projek</option>
+                            <option value="website">Website Development</option>
+                            <option value="webapp">Web Application</option>
+                            <option value="mobile">Mobile App</option>
+                            <option value="design">UI/UX Design</option>
+                            <option value="consulting">Consulting</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="budget">Kisaran Anggaran</label>
+                        <select id="budget" name="budget">
+                            <option value="">Pilih anggaran</option>
+                            <option value="small">< $5,000</option>
+                            <option value="medium">$5,000 - $15,000</option>
+                            <option value="large">$15,000 - $50,000</option>
+                            <option value="enterprise">> $50,000</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Pesan <span class="required">*</span></label>
+                        <textarea id="message" name="message" rows="6" placeholder="Ceritakan tentang proyek Anda..." required></textarea>
+                        <span class="error-message"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-large">
+                        Kirim Pesan
+                    </button>
+
+                    <div id="formSuccess" class="form-message success" style="display: none;">
+                        ✓ Terima kasih! Pesan Anda telah berhasil dikirim. Saya akan segera menghubungi Anda.
+                    </div>
+
+                    <div id="formError" class="form-message error" style="display: none;">
+                        ✗ Oops! Something went wrong. Please try again.
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <div class="container">
+                <h2>Pertanyaan yang Sering Diajukan</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>Layanan apa saja yang Anda tawarkan?</h3>
+                        <p>Saya berfokus pada pengembangan web, termasuk pengembangan frontend dan backend, desain UI/UX, serta pembuatan situs web responsif. Saya juga menawarkan layanan konsultasi untuk proyek teknis.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Berapa lama waktu yang dibutuhkan untuk proyek biasa?</h3>
+                        <p>Waktu penyelesaian proyek bervariasi tergantung pada cakupan dan kompleksitasnya. Situs web sederhana bisa memakan waktu 2-4 minggu, sedangkan aplikasi web kompleks bisa memakan waktu 2-3 bulan atau lebih. Saya akan memberikan timeline yang rinci setelah membahas kebutuhan Anda.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Apakah Anda bekerja dengan klien secara remote?</h3>
+                        <p>Ya! Saya bekerja dengan klien dari seluruh dunia. Saya berpengalaman dalam kolaborasi jarak jauh dan menggunakan alat seperti Slack, Zoom, dan perangkat lunak manajemen proyek untuk memastikan komunikasi yang lancar.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Bagaimana proses kerja Anda?</h3>
+                        <p>Saya mengikuti pendekatan agile: penemuan dan perencanaan, desain dan prototipe, pengembangan dan pengujian, peluncuran, serta dukungan berkelanjutan. Anda akan terlibat sepanjang proses dengan pembaruan berkala.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Apakah Anda menyediakan dukungan berkelanjutan?</h3>
+                        <p>Ya, saya menawarkan paket pemeliharaan dan dukungan berkelanjutan untuk memastikan situs web atau aplikasi Anda tetap mutakhir, aman, dan berfungsi dengan lancar. Paket dapat disesuaikan dengan kebutuhan spesifik Anda.</p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h3>Bagaimana syarat pembayaran Anda?</h3>
+                        <p>Saya biasanya bekerja dengan pembayaran 50% awal untuk memulai proyek dan 50% setelah penyelesaian. Untuk proyek besar, kami dapat mengatur pembayaran berdasarkan tahapan. Metode pembayaran meliputi transfer bank dan PayPal.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-
-    <section class="faq-section">
-        <div class="container">
-            <h2>Pertanyaan yang Sering Diajukan</h2>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <h3>Layanan apa saja yang Anda tawarkan?</h3>
-                    <p>Saya berfokus pada pengembangan web, termasuk pengembangan frontend dan backend, desain UI/UX, serta pembuatan situs web responsif. Saya juga menawarkan layanan konsultasi untuk proyek teknis.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>Berapa lama waktu yang dibutuhkan untuk proyek biasa?</h3>
-                    <p>Waktu penyelesaian proyek bervariasi tergantung pada cakupan dan kompleksitasnya. Situs web sederhana bisa memakan waktu 2-4 minggu, sedangkan aplikasi web kompleks bisa memakan waktu 2-3 bulan atau lebih. Saya akan memberikan timeline yang rinci setelah membahas kebutuhan Anda.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>Apakah Anda bekerja dengan klien secara remote?</h3>
-                    <p>Ya! Saya bekerja dengan klien dari seluruh dunia. Saya berpengalaman dalam kolaborasi jarak jauh dan menggunakan alat seperti Slack, Zoom, dan perangkat lunak manajemen proyek untuk memastikan komunikasi yang lancar.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>Bagaimana proses kerja Anda?</h3>
-                    <p>Saya mengikuti pendekatan agile: penemuan dan perencanaan, desain dan prototipe, pengembangan dan pengujian, peluncuran, serta dukungan berkelanjutan. Anda akan terlibat sepanjang proses dengan pembaruan berkala.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>Apakah Anda menyediakan dukungan berkelanjutan?</h3>
-                    <p>Ya, saya menawarkan paket pemeliharaan dan dukungan berkelanjutan untuk memastikan situs web atau aplikasi Anda tetap mutakhir, aman, dan berfungsi dengan lancar. Paket dapat disesuaikan dengan kebutuhan spesifik Anda.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>Bagaimana syarat pembayaran Anda?</h3>
-                    <p>Saya biasanya bekerja dengan pembayaran 50% awal untuk memulai proyek dan 50% setelah penyelesaian. Untuk proyek besar, kami dapat mengatur pembayaran berdasarkan tahapan. Metode pembayaran meliputi transfer bank dan PayPal.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <footer class="footer">
         <div class="container">
@@ -987,7 +1065,7 @@
                 <div class="footer-section">
                     <h3>Koneksi</h3>
                     <div class="social-links">
-                        <a href="https://github.com/MuhammadFadil1504" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://github.com/MuhammadFadil1504/MuhammadFadil1504-Project-Kelompok-4-MK-Pengembangan-Perangkat-Lunak-Open-Source.git" target="_blank" rel="noopener noreferrer">GitHub</a>
                         <a href="https://www.instagram.com/afriadiikhn09" target="_blank" rel="noopener noreferrer">Instagram</a>
                         <a href="mailto:afriadiikhwan9@gmail.com">Email</a>
                     </div>
@@ -1002,6 +1080,29 @@
     </footer>
 
     <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const themeIcon = document.querySelector('.theme-icon');
+
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+
+        themeToggle.addEventListener('click', function() {
+            let theme = html.getAttribute('data-theme');
+            let newTheme = theme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+
         // Hamburger Menu Toggle
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
@@ -1088,51 +1189,6 @@
                 budget: formData.get('budget')
             });
         });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe FAQ items
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateY(20px)';
-            item.style.transition = 'all 0.6s ease';
-            observer.observe(item);
-        });
-
-        // Observe team cards
-        document.querySelectorAll('.team-member-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateX(-20px)';
-            card.style.transition = 'all 0.6s ease';
-            observer.observe(card);
-        });
     </script>
 </body>
-</html>
+</html></parameter>

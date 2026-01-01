@@ -373,17 +373,17 @@
             display: none;
             padding: 30px;
             text-align: center;
-            background: #f9f9f9;
+            background: var(--bg-secondary);
             border-radius: 8px;
             margin: 20px 0;
         }
 
         #noResultsMessage h3 {
-            color: #666;
+            color: var(--text-secondary);
         }
 
         #noResultsMessage p {
-            color: #999;
+            color: var(--text-secondary);
         }
 
         /* Pagination */
@@ -617,14 +617,15 @@
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">Digital Groups</div>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="blog.html" class="active">Blog</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <li><button class="theme-toggle" id="themeToggle"><span class="theme-icon">🌙</span></button></li>
             </ul>
-            <div class="hamburger">
+            <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -636,7 +637,7 @@
     <header class="page-header">
         <div class="container">
             <h1>Blog</h1>
-            <p>Tentang pengembangan web, tutorial, dan berisi artikel, dokumentasi, serta catatan proyek yang kami kerjakan. </p>
+            <p>Tentang pengembangan web, tutorial, dan berisi artikel, dokumentasi, serta catatan proyek yang kami kerjakan.</p>
         </div>
     </header>
 
@@ -859,11 +860,11 @@
                 <div class="footer-section">
                     <h3>Tautan Cepat</h3>
                     <ul class="footer-links">
-                        <li><a href="/index.html">Home</a></li>
-                        <li><a href="/pages/about.html">About</a></li>
-                        <li><a href="/pages/projects.html">Projects</a></li>
-                        <li><a href="/pages/blog.html">Blog</a></li>
-                        <li><a href="/pages/contact.html">Contact</a></li>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
                 
@@ -910,7 +911,7 @@
 
         // Hamburger Menu Toggle
         const hamburger = document.getElementById('hamburger');
-        const navMenu = document.querySelector('.nav-menu');
+        const navMenu = document.getElementById('navMenu');
 
         hamburger.addEventListener('click', function() {
             navMenu.classList.toggle('active');
@@ -938,36 +939,6 @@
             });
         });
 
-        // Modal Functions
-        function openModal(modalId) {
-            document.getElementById(modalId).style.display = "block";
-            document.body.style.overflow = "hidden";
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = "none";
-            document.body.style.overflow = "auto";
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            if (event.target.classList.contains('modal')) {
-                event.target.style.display = "none";
-                document.body.style.overflow = "auto";
-            }
-        }
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                const modals = document.querySelectorAll('.modal');
-                modals.forEach(modal => {
-                    modal.style.display = 'none';
-                });
-                document.body.style.overflow = "auto";
-            }
-        });
-
         // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
@@ -976,6 +947,113 @@
             } else {
                 navbar.style.boxShadow = '0 2px 10px var(--shadow)';
             }
+        });
+
+        // Search Functionality
+        const mainSearchInput = document.getElementById('mainSearchInput');
+        const mainSearchButton = document.getElementById('mainSearchButton');
+        const clearSearchButton = document.getElementById('clearSearch');
+        const searchResultsMessage = document.getElementById('searchResultsMessage');
+        const searchResultsText = document.getElementById('searchResultsText');
+        const noResultsMessage = document.getElementById('noResultsMessage');
+        const blogPosts = document.querySelectorAll('.blog-post-full');
+
+        function performSearch() {
+            const searchTerm = mainSearchInput.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                showAllPosts();
+                return;
+            }
+
+            let visibleCount = 0;
+
+            blogPosts.forEach(post => {
+                const title = post.querySelector('h2').textContent.toLowerCase();
+                const content = post.querySelector('p').textContent.toLowerCase();
+                const category = post.querySelector('.blog-category').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || content.includes(searchTerm) || category.includes(searchTerm)) {
+                    post.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+
+            if (visibleCount > 0) {
+                searchResultsText.textContent = `Ditemukan ${visibleCount} artikel untuk "${searchTerm}"`;
+                searchResultsMessage.style.display = 'block';
+                noResultsMessage.style.display = 'none';
+            } else {
+                searchResultsMessage.style.display = 'none';
+                noResultsMessage.style.display = 'block';
+            }
+        }
+
+        function showAllPosts() {
+            blogPosts.forEach(post => {
+                post.style.display = 'block';
+            });
+            searchResultsMessage.style.display = 'none';
+            noResultsMessage.style.display = 'none';
+            mainSearchInput.value = '';
+        }
+
+        mainSearchButton.addEventListener('click', performSearch);
+        
+        mainSearchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        clearSearchButton.addEventListener('click', showAllPosts);
+
+        // Category filter (optional enhancement)
+        document.querySelectorAll('.category-list a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const categoryText = this.textContent.split('(')[0].trim().toLowerCase();
+                
+                let visibleCount = 0;
+                blogPosts.forEach(post => {
+                    const postCategory = post.querySelector('.blog-category').textContent.toLowerCase();
+                    if (postCategory === categoryText) {
+                        post.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+
+                searchResultsText.textContent = `Ditemukan ${visibleCount} artikel dalam kategori "${categoryText}"`;
+                searchResultsMessage.style.display = 'block';
+                noResultsMessage.style.display = 'none';
+            });
+        });
+
+        // Tag filter (optional enhancement)
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tagText = this.textContent.toLowerCase();
+                
+                let visibleCount = 0;
+                blogPosts.forEach(post => {
+                    const content = post.textContent.toLowerCase();
+                    if (content.includes(tagText)) {
+                        post.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+
+                searchResultsText.textContent = `Ditemukan ${visibleCount} artikel dengan tag "${tagText}"`;
+                searchResultsMessage.style.display = 'block';
+                noResultsMessage.style.display = 'none';
+            });
         });
     </script>
 </body>
