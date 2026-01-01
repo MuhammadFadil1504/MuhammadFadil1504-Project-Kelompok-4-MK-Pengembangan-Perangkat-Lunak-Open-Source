@@ -6,31 +6,225 @@
     <meta name="description" content="Blog tentang pengembangan web, tutorial, dan wawasan industri. Temukan artikel terbaru tentang HTML, CSS, JavaScript, React, dan banyak lagi.">
     <title>Blog - Kelompok 4</title>
     
-    <link rel="stylesheet" href="../assets/css/variables.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/responsive.css">
-    
     <style>
-        /* Style untuk form pencarian utama */
+        :root {
+            --primary-color: #6366f1;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #f3f4f6;
+            --border-color: #e5e7eb;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-md: rgba(0, 0, 0, 0.15);
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #818cf8;
+            --secondary-color: #a78bfa;
+            --accent-color: #f472b6;
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+            --bg-primary: #111827;
+            --bg-secondary: #1f2937;
+            --bg-tertiary: #374151;
+            --border-color: #374151;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-md: rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--bg-primary);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: none;
+            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px var(--shadow-md);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--gradient-1);
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main Content */
+        .page-content {
+            padding: 60px 0;
+        }
+
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 3rem;
+        }
+
+        .blog-main {
+            min-width: 0;
+        }
+
+        /* Search Section */
         .main-search-section {
             background: linear-gradient(135deg, #667eea 0%, #00c6ff 100%);
             padding: 40px 20px;
             margin-bottom: 40px;
             border-radius: 10px;
         }
-        
+
         .main-search-box {
             max-width: 600px;
             margin: 0 auto;
         }
-        
+
         .main-search-box h2 {
             color: white;
             text-align: center;
             margin-bottom: 20px;
             font-size: 1.8rem;
         }
-        
+
         .search-form {
             display: flex;
             gap: 10px;
@@ -39,7 +233,7 @@
             border-radius: 50px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        
+
         .search-form input {
             flex: 1;
             border: none;
@@ -48,7 +242,7 @@
             border-radius: 50px;
             outline: none;
         }
-        
+
         .search-form button {
             background: #333;
             color: white;
@@ -59,22 +253,361 @@
             font-weight: 600;
             transition: all 0.3s ease;
         }
-        
+
         .search-form button:hover {
             background: #555;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
-        
+
+        /* Search Results */
+        #searchResultsMessage {
+            padding: 15px;
+            margin-bottom: 20px;
+            background: var(--bg-secondary);
+            border-radius: 5px;
+            display: none;
+        }
+
+        #clearSearch {
+            margin-left: 10px;
+            padding: 5px 10px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* Blog Posts */
+        .blog-post-full {
+            background: var(--bg-secondary);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .blog-post-full:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px var(--shadow-md);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+            background: var(--bg-tertiary);
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-post-full:hover .blog-image img {
+            transform: scale(1.1);
+        }
+
+        .blog-post-full > div:not(.blog-image) {
+            padding: 2rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .blog-date,
+        .blog-category,
+        .blog-read-time {
+            color: var(--text-secondary);
+        }
+
+        .blog-category {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .blog-post-full h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-post-full h2 a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .blog-post-full h2 a:hover {
+            color: var(--primary-color);
+        }
+
+        .blog-post-full p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .read-more:hover {
+            transform: translateX(5px);
+        }
+
+        /* No Results */
+        #noResultsMessage {
+            display: none;
+            padding: 30px;
+            text-align: center;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        #noResultsMessage h3 {
+            color: #666;
+        }
+
+        #noResultsMessage p {
+            color: #999;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .page-link {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border-color);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .page-link:hover,
+        .page-link.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar-widget {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        .sidebar-widget h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+        }
+
+        .category-list,
+        .recent-posts {
+            list-style: none;
+        }
+
+        .category-list li,
+        .recent-posts li {
+            margin-bottom: 0.8rem;
+        }
+
+        .category-list a,
+        .recent-posts a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .category-list a:hover,
+        .recent-posts a:hover {
+            color: var(--primary-color);
+        }
+
+        .category-list span {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .recent-posts h4 {
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .post-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .tag-cloud {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: var(--gradient-1);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-md);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--bg-primary);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .blog-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
             .search-form {
                 flex-direction: column;
                 border-radius: 15px;
             }
-            
+
             .search-form input,
             .search-form button {
                 border-radius: 10px;
+            }
+
+            .blog-image {
+                height: 200px;
             }
         }
     </style>
@@ -125,9 +658,9 @@
                     </div>
 
                     <!-- Search Results Message -->
-                    <div id="searchResultsMessage" style="display: none; padding: 15px; margin-bottom: 20px; background: #f0f0f0; border-radius: 5px;">
+                    <div id="searchResultsMessage">
                         <span id="searchResultsText"></span>
-                        <button id="clearSearch" style="margin-left: 10px; padding: 5px 10px; background: #333; color: white; border: none; border-radius: 3px; cursor: pointer;">Hapus Pencarian</button>
+                        <button id="clearSearch">Hapus Pencarian</button>
                     </div>
 
                     <!-- Blog Post 1 -->
@@ -135,14 +668,16 @@
                         <div class="blog-image">
                             <img src="../assets/images/blog1.jpg" alt="Getting Started with Web Development">
                         </div>
-                        <div class="blog-meta">
-                            <span class="blog-date">December 24, 2025</span>
-                            <span class="blog-category">Tutorial</span>
-                            <span class="blog-read-time">5 Menit Membaca</span>
+                        <div>
+                            <div class="blog-meta">
+                                <span class="blog-date">December 24, 2025</span>
+                                <span class="blog-category">Tutorial</span>
+                                <span class="blog-read-time">5 Menit Membaca</span>
+                            </div>
+                            <h2><a href="artikel1.html">Mulai Mengembangkan Web di Tahun 2025</a></h2>
+                            <p>Pengembangan web adalah bidang yang menarik dengan peluang tak terbatas. Baik Anda baru memulai atau ingin meningkatkan keterampilan Anda, panduan ini akan membantu Anda menjelajahi lanskap pengembangan web modern. Kami akan membahas teknologi, alat, dan praktik terbaik yang perlu Anda ketahui...</p>
+                            <a href="artikel1.html" class="read-more">Baca lebih lanjut →</a>
                         </div>
-                        <h2><a href="artikel1.html">Mulai Mengembangkan Web di Tahun 2025</a></h2>
-                        <p>Pengembangan web adalah bidang yang menarik dengan peluang tak terbatas. Baik Anda baru memulai atau ingin meningkatkan keterampilan Anda, panduan ini akan membantu Anda menjelajahi lanskap pengembangan web modern. Kami akan membahas teknologi, alat, dan praktik terbaik yang perlu Anda ketahui...</p>
-                        <a href="artikel1.html" class="read-more">Baca lebih lanjut →</a>
                     </article>
 
                     <!-- Blog Post 2 -->
@@ -150,14 +685,16 @@
                         <div class="blog-image">
                             <img src="../assets/images/blog2.jpg" alt="CSS Grid vs Flexbox">
                         </div>
-                        <div class="blog-meta">
-                            <span class="blog-date">December 20, 2025</span>
-                            <span class="blog-category">CSS</span>
-                            <span class="blog-read-time">8 Menit Membaca</span>
+                        <div>
+                            <div class="blog-meta">
+                                <span class="blog-date">December 20, 2025</span>
+                                <span class="blog-category">CSS</span>
+                                <span class="blog-read-time">8 Menit Membaca</span>
+                            </div>
+                            <h2><a href="artikel2.html">CSS Grid vs Flexbox: Kapan Menggunakan Masing-Masing</a></h2>
+                            <p>Memahami kapan menggunakan CSS Grid dan kapan menggunakan Flexbox sangat penting untuk membuat tata letak yang efisien dan mudah dipelihara. Keduanya adalah sistem tata letak yang kuat, tetapi mereka unggul dalam skenario berbeda. Dalam artikel ini, kita akan mengeksplor kekuatan masing-masing dan kapan menggunakannya...</p>
+                            <a href="artikel2.html" class="read-more">Baca lebih lanjut →</a>
                         </div>
-                        <h2><a href="artikel2.html">CSS Grid vs Flexbox: Kapan Menggunakan Masing-Masing</a></h2>
-                        <p>Memahami kapan menggunakan CSS Grid dan kapan menggunakan Flexbox sangat penting untuk membuat tata letak yang efisien dan mudah dipelihara. Keduanya adalah sistem tata letak yang kuat, tetapi mereka unggul dalam skenario berbeda. Dalam artikel ini, kita akan mengeksplor kekuatan masing-masing dan kapan menggunakannya...</p>
-                        <a href="artikel2.html" class="read-more">Baca lebih lanjut →</a>
                     </article>
 
                     <!-- Blog Post 3 -->
@@ -165,14 +702,16 @@
                         <div class="blog-image">
                             <img src="../assets/images/blog3.jpg" alt="Modern JavaScript Features">
                         </div>
-                        <div class="blog-meta">
-                            <span class="blog-date">December 15, 2024</span>
-                            <span class="blog-category">JavaScript</span>
-                            <span class="blog-read-time">10 Menit Membaca</span>
+                        <div>
+                            <div class="blog-meta">
+                                <span class="blog-date">December 15, 2024</span>
+                                <span class="blog-category">JavaScript</span>
+                                <span class="blog-read-time">10 Menit Membaca</span>
+                            </div>
+                            <h2><a href="artikel3.html">Fitur Modern JavaScript yang Harus Anda Ketahui</a></h2>
+                            <p>JavaScript telah berkembang pesat dalam beberapa tahun terakhir. ES6 dan selanjutnya telah memperkenalkan fitur-fitur kuat yang membuat kode Anda lebih ringkas dan mudah dibaca. Mari kita eksplor optional chaining, nullish coalescing, async/await, dan fitur-fitur modern JavaScript lainnya yang akan meningkatkan alur kerja pengembangan Anda...</p>
+                            <a href="artikel3.html" class="read-more">Baca lebih lanjut →</a>
                         </div>
-                        <h2><a href="artikel3.html">Fitur Modern JavaScript yang Harus Anda Ketahui</a></h2>
-                        <p>JavaScript telah berkembang pesat dalam beberapa tahun terakhir. ES6 dan selanjutnya telah memperkenalkan fitur-fitur kuat yang membuat kode Anda lebih ringkas dan mudah dibaca. Mari kita eksplor optional chaining, nullish coalescing, async/await, dan fitur-fitur modern JavaScript lainnya yang akan meningkatkan alur kerja pengembangan Anda...</p>
-                        <a href="artikel3.html" class="read-more">Baca lebih lanjut →</a>
                     </article>
 
                     <!-- Blog Post 4 -->
@@ -180,14 +719,16 @@
                         <div class="blog-image">
                             <img src="../assets/images/blog4.jpg" alt="Responsive Design">
                         </div>
-                        <div class="blog-meta">
-                            <span class="blog-date">December 10, 2025</span>
-                            <span class="blog-category">Design</span>
-                            <span class="blog-read-time">7 Menit Membaca</span>
+                        <div>
+                            <div class="blog-meta">
+                                <span class="blog-date">December 10, 2025</span>
+                                <span class="blog-category">Design</span>
+                                <span class="blog-read-time">7 Menit Membaca</span>
+                            </div>
+                            <h2><a href="artikel4.html">Desain Responsif: Praktik Terbaik untuk 2024</a></h2>
+                            <p>Desain responsif sangat penting dalam dunia web saat ini. Dengan berbagai ukuran layar dan resolusi yang tersedia, desain responsif bukan lagi pilihan, tetapi kebutuhan. Pelajari prinsip-prinsip utama, pendekatan mobile-first, dan teknik-teknik praktis untuk membangun situs web yang benar-benar responsif...</p>
+                            <a href="artikel4.html" class="read-more">Baca lebih lanjut →</a>
                         </div>
-                        <h2><a href="artikel4.html">Desain Responsif: Praktik Terbaik untuk 2024</a></h2>
-                        <p>Desain responsif sangat penting dalam dunia web saat ini. Dengan berbagai ukuran layar dan resolusi yang tersedia, desain responsif bukan lagi pilihan, tetapi kebutuhan. Pelajari prinsip-prinsip utama, pendekatan mobile-first, dan teknik-teknik praktis untuk membangun situs web yang benar-benar responsif...</p>
-                        <a href="artikel4.html" class="read-more">Baca lebih lanjut →</a>
                     </article>
 
                     <!-- Blog Post 5 -->
@@ -195,14 +736,16 @@
                         <div class="blog-image">
                             <img src="../assets/images/blog5.jpg" alt="React Hooks">
                         </div>
-                        <div class="blog-meta">
-                            <span class="blog-date">December 5, 2025</span>
-                            <span class="blog-category">React</span>
-                            <span class="blog-read-time">12 Menit Membaca</span>
+                        <div>
+                            <div class="blog-meta">
+                                <span class="blog-date">December 5, 2025</span>
+                                <span class="blog-category">React</span>
+                                <span class="blog-read-time">12 Menit Membaca</span>
+                            </div>
+                            <h2><a href="artikel5.html">Mastering React Hooks: Panduan Komprehensif</a></h2>
+                            <p>React Hooks telah merevolusi cara kita menulis komponen React. Dari useState dan useEffect hingga custom hooks, memahami cara memanfaatkan fitur-fitur kuat ini adalah kunci untuk menulis kode React yang bersih dan mudah dipelihara. Panduan komprehensif ini mencakup segala hal yang perlu Anda ketahui tentang React Hooks...</p>
+                            <a href="artikel5.html" class="read-more">Baca lebih lanjut →</a>
                         </div>
-                        <h2><a href="artikel5.html">Mastering React Hooks: Panduan Komprehensif</a></h2>
-                        <p>React Hooks telah merevolusi cara kita menulis komponen React. Dari useState dan useEffect hingga custom hooks, memahami cara memanfaatkan fitur-fitur kuat ini adalah kunci untuk menulis kode React yang bersih dan mudah dipelihara. Panduan komprehensif ini mencakup segala hal yang perlu Anda ketahui tentang React Hooks...</p>
-                        <a href="artikel5.html" class="read-more">Baca lebih lanjut →</a>
                     </article>
 
                     <!-- Blog Post 6 -->
@@ -210,20 +753,22 @@
                         <div class="blog-image">
                             <img src="../assets/images/blog6.jpg" alt="Web Performance">
                         </div>
-                        <div class="blog-meta">
-                            <span class="blog-date">November 30, 2025</span>
-                            <span class="blog-category">Performance</span>
-                            <span class="blog-read-time">9 Menit Membaca</span>
+                        <div>
+                            <div class="blog-meta">
+                                <span class="blog-date">November 30, 2025</span>
+                                <span class="blog-category">Performance</span>
+                                <span class="blog-read-time">9 Menit Membaca</span>
+                            </div>
+                            <h2><a href="artikel6.html">Mengoptimalkan Performa Web: Tips dan Teknik</a></h2>
+                            <p>Performa web sangat penting untuk pengalaman pengguna dan peringkat SEO. Pelajari cara mengoptimalkan gambar, meminimalkan JavaScript, memanfaatkan caching browser, dan menerapkan lazy loading untuk membuat situs web yang cepat dan menarik...</p>
+                            <a href="artikel6.html" class="read-more">Baca lebih lanjut →</a>
                         </div>
-                        <h2><a href="artikel6.html">Mengoptimalkan Performa Web: Tips dan Teknik</a></h2>
-                        <p>Performa web sangat penting untuk pengalaman pengguna dan peringkat SEO. Pelajari cara mengoptimalkan gambar, meminimalkan JavaScript, memanfaatkan caching browser, dan menerapkan lazy loading untuk membuat situs web yang cepat dan menarik...</p>
-                        <a href="artikel6.html" class="read-more">Baca lebih lanjut →</a>
                     </article>
 
                     <!-- No Results Message -->
-                    <div id="noResultsMessage" style="display: none; padding: 30px; text-align: center; background: #f9f9f9; border-radius: 8px; margin: 20px 0;">
-                        <h3 style="color: #666;">Tidak ada artikel yang ditemukan</h3>
-                        <p style="color: #999;">Coba kata kunci pencarian yang berbeda</p>
+                    <div id="noResultsMessage">
+                        <h3>Tidak ada artikel yang ditemukan</h3>
+                        <p>Coba kata kunci pencarian yang berbeda</p>
                     </div>
 
                     <!-- Pagination -->
@@ -235,8 +780,8 @@
                     </div>
                 </div>
 
-           
-
+                <!-- Sidebar -->
+                <aside class="sidebar">
                     <!-- Categories Widget -->
                     <div class="sidebar-widget">
                         <h3>Kategori</h3>
@@ -296,7 +841,7 @@
                             <a href="#" class="tag">API</a>
                             <a href="#" class="tag">MongoDB</a>
                         </div>
-                    
+                    </div>
                 </aside>
             </div>
         </div>
@@ -308,7 +853,7 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Digital Groups</h3>
-                    <p>Pengembangan & Desain Web yang bersemangat menciptakan pengalaman digital yang indah.</p>
+                    <p>Pengembang & Desainer Web yang bersemangat menciptakan pengalaman digital yang indah.</p>
                 </div>
                 
                 <div class="footer-section">
@@ -325,104 +870,112 @@
                 <div class="footer-section">
                     <h3>Koneksi</h3>
                     <div class="social-links">
-                        <a href="https://github.com/Afriadiikhwan" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://github.com/MuhammadFadil1504" target="_blank" rel="noopener noreferrer">GitHub</a>
                         <a href="https://www.instagram.com/afriadiikhn09" target="_blank" rel="noopener noreferrer">Instagram</a>
+                        <a href="mailto:afriadiikhwan9@gmail.com">Email</a>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 Digital Groups. Semua hak dilindungi.</p>
+                <p>&copy; 2025 Digital Groups. All rights reserved.</p>
+                <p>Dibuat dengan ❤️ dan ☕</p>
             </div>
         </div>
     </footer>
 
-    <script src="../assets/js/navigation.js"></script>
-    <script src="../assets/js/main.js"></script>
-    
-    <!-- Search Functionality Script -->
     <script>
-        // Fungsi pencarian artikel
-        document.addEventListener('DOMContentLoaded', function() {
-            const mainSearchInput = document.getElementById('mainSearchInput');
-            const mainSearchButton = document.getElementById('mainSearchButton');
-            const blogPosts = document.querySelectorAll('.blog-post-full');
-            const noResultsMessage = document.getElementById('noResultsMessage');
-            const searchResultsMessage = document.getElementById('searchResultsMessage');
-            const searchResultsText = document.getElementById('searchResultsText');
-            const clearSearchButton = document.getElementById('clearSearch');
-            const pagination = document.querySelector('.pagination');
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const themeIcon = document.querySelector('.theme-icon');
 
-            // Fungsi untuk melakukan pencarian
-            function searchArticles(searchTerm = null) {
-                const term = searchTerm || mainSearchInput.value.toLowerCase().trim();
-                let visibleCount = 0;
+        // Check for saved theme preference
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
 
-                if (term === '') {
-                    // Jika pencarian kosong, tampilkan semua artikel
-                    blogPosts.forEach(post => post.style.display = 'block');
-                    noResultsMessage.style.display = 'none';
-                    searchResultsMessage.style.display = 'none';
-                    pagination.style.display = 'flex';
-                    return;
-                }
+        themeToggle.addEventListener('click', function() {
+            let theme = html.getAttribute('data-theme');
+            let newTheme = theme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
 
-                // Lakukan pencarian
-                blogPosts.forEach(post => {
-                    const title = post.querySelector('h2').textContent.toLowerCase();
-                    const content = post.querySelector('p').textContent.toLowerCase();
-                    const category = post.querySelector('.blog-category').textContent.toLowerCase();
-                    
-                    if (title.includes(term) || content.includes(term) || category.includes(term)) {
-                        post.style.display = 'block';
-                        visibleCount++;
-                    } else {
-                        post.style.display = 'none';
-                    }
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'light' ? '🌙' : '☀️';
+        }
+
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            
+            const spans = hamburger.querySelectorAll('span');
+            if (navMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+
+        // Modal Functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = "block";
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = "none";
+            document.body.style.overflow = "auto";
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.style.display = 'none';
                 });
-
-                // Tampilkan pesan hasil pencarian
-                if (visibleCount > 0) {
-                    noResultsMessage.style.display = 'none';
-                    searchResultsMessage.style.display = 'block';
-                    searchResultsText.textContent = `Ditemukan ${visibleCount} artikel untuk "${term}"`;
-                    pagination.style.display = 'none';
-                } else {
-                    noResultsMessage.style.display = 'block';
-                    searchResultsMessage.style.display = 'none';
-                    pagination.style.display = 'none';
-                }
+                document.body.style.overflow = "auto";
             }
+        });
 
-            // Fungsi untuk menghapus pencarian
-            function clearSearch() {
-                mainSearchInput.value = '';
-                blogPosts.forEach(post => post.style.display = 'block');
-                noResultsMessage.style.display = 'none';
-                searchResultsMessage.style.display = 'none';
-                pagination.style.display = 'flex';
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.pageYOffset > 100) {
+                navbar.style.boxShadow = '0 4px 20px var(--shadow-md)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px var(--shadow)';
             }
-
-            // Event listener untuk button pencarian utama
-            mainSearchButton.addEventListener('click', () => searchArticles());
-
-            // Event listener untuk tombol hapus pencarian
-            clearSearchButton.addEventListener('click', clearSearch);
-
-            // Event listener untuk Enter key pada input utama
-            mainSearchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    searchArticles();
-                }
-            });
-
-            // Event listener untuk input real-time (opsional)
-            mainSearchInput.addEventListener('input', function() {
-                if (mainSearchInput.value === '') {
-                    clearSearch();
-                }
-            });
         });
     </script>
 </body>
