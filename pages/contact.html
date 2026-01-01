@@ -3,27 +3,709 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact me - Get in touch for projects and collaborations">
-    <title>Contact - Afriadi ikhwan</title>
+    <title>Contact - Digital Groups</title>
     
-    
-    <link rel="stylesheet" href="../assets/css/variables.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <style>
+        :root {
+            --primary-color: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary-color: #8b5cf6;
+            --accent-color: #ec4899;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --bg-tertiary: #f3f4f6;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --shadow-md: rgba(0, 0, 0, 0.15);
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #f9fafb;
+            --text-secondary: #d1d5db;
+            --bg-primary: #111827;
+            --bg-secondary: #1f2937;
+            --bg-tertiary: #374151;
+            --border-color: #374151;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-md: rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-primary);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--bg-primary);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: var(--gradient-1);
+            padding: 100px 0 80px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before,
+        .page-header::after {
+            content: '';
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .page-header::before {
+            width: 500px;
+            height: 500px;
+            top: -250px;
+            right: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .page-header::after {
+            width: 300px;
+            height: 300px;
+            bottom: -150px;
+            left: -50px;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Contact Quick Info */
+        .contact-quick-info {
+            background: var(--bg-primary);
+            padding: 60px 0;
+            margin-top: -40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .quick-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .quick-info-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .quick-info-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+
+        .quick-info-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.5rem;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .quick-info-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .quick-info-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .quick-info-card a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .quick-info-card a:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Main Content */
+        .contact-content {
+            padding: 60px 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Team Section */
+        .team-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .team-section > p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .team-cards-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .team-member-card {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .team-member-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+
+        .member-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .member-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .member-header h3 {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+        }
+
+        .member-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+
+        .detail-item:hover {
+            background-color: var(--bg-tertiary);
+        }
+
+        .detail-icon {
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        .detail-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .detail-item a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        /* Contact Form */
+        .form-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-section > p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .contact-form {
+            background: var(--bg-secondary);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .required {
+            color: var(--error-color);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .btn-submit {
+            background: var(--gradient-1);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(-1px);
+        }
+
+        .form-message {
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .form-message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 2px solid var(--success-color);
+        }
+
+        .form-message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 2px solid var(--error-color);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--bg-secondary);
+            padding: 80px 0;
+            margin-top: 60px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px var(--shadow);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--shadow-md);
+            border-left-color: var(--primary-color);
+        }
+
+        .faq-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .faq-item h3::before {
+            content: '❓';
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .faq-item p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+        }
+
+        .social-links a:hover {
+            color: white;
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--bg-primary);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px var(--shadow);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .quick-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .member-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header {
+                padding: 60px 0 40px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-   
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">Digital Groups</div>
-            <ul class="nav-menu">
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html" class="active">Contact</a></li>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact" class="active">Contact</a></li>
             </ul>
-            <div class="hamburger">
+            <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -31,347 +713,181 @@
         </div>
     </nav>
 
-   
-   <div class="contact-info-section">
-    <h2>Informasi Kontak Tim</h2>
-    <p>Hubungi kami melalui saluran berikut. Kami selalu terbuka untuk mendiskusikan proyek baru, ide kreatif, atau peluang untuk menjadi bagian dari visi Anda.</p>
-    
-    <!-- Team Members Contact Cards -->
-    <div class="team-cards-grid">
-        
-        <!-- Card 1: Afriadi Ikhwan -->
-        <div class="team-member-card">
-            <div class="member-header">
-                <div class="member-avatar">AI</div>
-                <h3>Afriadi Ikhwan</h3>
-            </div>
-            <div class="member-details">
-                <div class="detail-item">
-                    <span class="detail-label">📧 Email:</span>
+    <header class="page-header">
+        <div class="container">
+            <h1>Mari Terhubung</h1>
+            <p>Siap untuk memulai proyek Anda? Hubungi kami dan mari wujudkan ide digital Anda menjadi kenyataan!</p>
+        </div>
+    </header>
+
+    <section class="contact-quick-info">
+        <div class="container">
+            <div class="quick-info-grid">
+                <div class="quick-info-card">
+                    <div class="quick-info-icon">📧</div>
+                    <h3>Email Kami</h3>
+                    <p>Kirim email kapan saja</p>
                     <a href="mailto:afriadiikhwan9@gmail.com">afriadiikhwan9@gmail.com</a>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-label">📱 Phone:</span>
+                <div class="quick-info-card">
+                    <div class="quick-info-icon">📱</div>
+                    <h3>Telepon</h3>
+                    <p>Senin - Jumat, 9:00 - 18:00</p>
                     <a href="tel:+6283181424595">+62 831-8142-4595</a>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-label">📍 Lokasi:</span>
-                    <span>Padang, Indonesia</span>
+                <div class="quick-info-card">
+                    <div class="quick-info-icon">📍</div>
+                    <h3>Lokasi</h3>
+                    <p>Temukan kami di</p>
+                    <a href="#">Padang, Indonesia</a>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-label">💻 GitHub:</span>
-                    <a href="https://github.com/Afriadiikhwan" target="_blank" rel="noopener noreferrer">Afriadiikhwan</a>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">📷 Instagram:</span>
-                    <a href="https://www.instagram.com/afriadiikhn09" target="_blank" rel="noopener noreferrer">@afriadiikhn09</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card 2: Raufa Adila -->
-        <div class="team-member-card">
-            <div class="member-header">
-                <div class="member-avatar">RA</div>
-                <h3>Raufa Adila</h3>
-            </div>
-            <div class="member-details">
-                <div class="detail-item">
-                    <span class="detail-label">📧 Email:</span>
-                    <a href="mailto:raufaadila0@gmail.com">raufaadila0@gmail.com</a>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">📱 Phone:</span>
-                    <a href="tel:+6281277401858">+62 812-7740-1858</a>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">📍 Lokasi:</span>
-                    <span>Padang, Indonesia</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">💻 GitHub:</span>
-                    <a href="#" target="_blank" rel="noopener noreferrer">-</a>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">📷 Instagram:</span>
-                    <a href="raufa_adl" target="_blank" rel="noopener noreferrer">raufa_adl</a>
+                <div class="quick-info-card">
+                    <div class="quick-info-icon">⏱️</div>
+                    <h3>Waktu Respons</h3>
+                    <p>Biasanya dalam</p>
+                    <a href="#">24 jam</a>
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Card 3: M. Fadil -->
-        <div class="team-member-card">
-            <div class="member-header">
-                <div class="member-avatar">MF</div>
-                <h3>M. Fadil</h3>
-            </div>
-            <div class="member-details">
-                <div class="detail-item">
-                    <span class="detail-label">📧 Email:</span>
-                    <a href="mailto:m.fadil10504@gmail.com">m.fadil10504@gmail.com</a>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">📱 Phone:</span>
-                    <a href="tel:+6282177079475">+62 821-7707-9475</a>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">📍 Lokasi:</span>
-                    <span>Padang, Indonesia</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">💻 GitHub:</span>
-                    <a href="MuhammadFadil1504" target="_blank" rel="noopener noreferrer">-</a>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">📷 Instagram:</span>
-                    <a href="muhammad_fadil154" target="_blank" rel="noopener noreferrer">muhammad_fadil154</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Card 4: Trisha Fania -->
-        <div class="team-member-card">
-            <div class="member-header">
-                <div class="member-avatar">TF</div>
-                <h3>Trisha Fania</h3>
-            </div>
-            <div class="member-details">
-                <div class="detail-item">
-                    <span class="detail-label">📧 Email:</span>
-                    <a href="mailto:trishafania@gmail.com">trishafania@gmail.com</a>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">📱 Phone:</span>
-                    <a href="tel:+6282285645612">+62 822-8564-5612</a>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">📍 Lokasi:</span>
-                    <span>Padang, Indonesia</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">💻 GitHub:</span>
-                    <a href="trishafannia" target="_blank" rel="noopener noreferrer">trishafannia</a>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">📷 Instagram:</span>
-                    <a href="https://www.instagram.com/trshfnn__?igsh=ajdiZXV2ZXNpOGZn" target="_blank" rel="noopener noreferrer">@trshfnn__</a>
-                </div>
-            </div>
-        </div>
-<style>
-/* Team Cards Grid */
-.team-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
-    margin: 2.5rem 0;
-}
-
-/* Team Member Card */
-.team-member-card {
-    background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    border: 2px solid #f0f0f0;
-}
-
-.team-member-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-    border-color: var(--primary-color);
-}
-
-/* Member Header */
-.member-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #e0e0e0;
-}
-
-.member-avatar {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.75rem;
-    font-weight: bold;
-    flex-shrink: 0;
-    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.3);
-}
-
-.member-header h3 {
-    font-size: 1.5rem;
-    color: var(--text-dark);
-    margin: 0;
-    font-weight: 600;
-}
-
-/* Member Details */
-.member-details {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-/* Detail Item */
-.detail-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    padding: 0.75rem;
-    background-color: #f5f5f6;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-.detail-item:hover {
-    background-color: #1187fc;
-}
-
-.detail-label {
-    font-weight: 600;
-    color: var(--text-dark);
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.detail-item a {
-    color: var(--primary-color);
-    text-decoration: none;
-    font-size: 0.95rem;
-    word-break: break-all;
-    transition: color 0.3s ease;
-    margin-left: 1.75rem;
-}
-
-.detail-item a:hover {
-    color: var(--primary-dark);
-    text-decoration: underline;
-}
-
-.detail-item span:not(.detail-label) {
-    color: var(--text-color);
-    font-size: 0.95rem;
-    margin-left: 1.75rem;
-}
-
-/* Responsive Design */
-@media (max-width: 1024px) {
-    .team-cards-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1.5rem;
-    }
-}
-
-@media (max-width: 768px) {
-    .team-cards-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .team-member-card {
-        padding: 1.5rem;
-    }
-    
-    .member-avatar {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-    }
-    
-    .member-header h3 {
-        font-size: 1.25rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .team-member-card {
-        padding: 1.25rem;
-    }
-    
-    .member-header {
-        flex-direction: column;
-        text-align: center;
-    }
-    
-    .detail-item a,
-    .detail-item span:not(.detail-label) {
-        margin-left: 0;
-        text-align: left;
-    }
-    
-    .detail-label {
-        font-size: 0.875rem;
-    }
-    
-    .detail-item a,
-    .detail-item span:not(.detail-label) {
-        font-size: 0.875rem;
-    }
-}
-</style>
-    </div>
-</div>
-                   
-                    <div class="availability-section">
-                        <h3>Tersedia</h3>
-                        <div class="availability-status">
-                            <span class="status-indicator available"></span>
-                            <span class="status-text">Saat ini tersedia untuk proyek freelance</span>
+    <main class="contact-content">
+        <div class="container">
+            <div class="content-grid">
+                <div class="team-section">
+                    <h2>Tim Kami</h2>
+                    <p>Kenali tim profesional kami yang siap membantu mewujudkan visi digital Anda. Kami terdiri dari developer dan designer berpengalaman.</p>
+                    
+                    <div class="team-cards-grid">
+                        <div class="team-member-card">
+                            <div class="member-header">
+                                <div class="member-avatar">AI</div>
+                                <h3>Afriadi Ikhwan</h3>
+                            </div>
+                            <div class="member-details">
+                                <div class="detail-item">
+                                    <span class="detail-icon">📧</span>
+                                    <a href="mailto:afriadiikhwan9@gmail.com">afriadiikhwan9@gmail.com</a>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">📱</span>
+                                    <a href="tel:+6283181424595">+62 831-8142-4595</a>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">💻</span>
+                                    <a href="https://github.com/Afriadiikhwan" target="_blank">GitHub</a>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">📷</span>
+                                    <a href="https://www.instagram.com/afriadiikhn09" target="_blank">Instagram</a>
+                                </div>
+                            </div>
                         </div>
-                        <p>Waktu respons: Biasanya dalam waktu 24 jam</p>
+
+                        <div class="team-member-card">
+                            <div class="member-header">
+                                <div class="member-avatar">RA</div>
+                                <h3>Raufa Adila</h3>
+                            </div>
+                            <div class="member-details">
+                                <div class="detail-item">
+                                    <span class="detail-icon">📧</span>
+                                    <a href="mailto:raufaadila0@gmail.com">raufaadila0@gmail.com</a>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">📱</span>
+                                    <a href="tel:+6281277401858">+62 812-7740-1858</a>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">📷</span>
+                                    <a href="https://www.instagram.com/raufa_adl" target="_blank">Instagram</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-member-card">
+                            <div class="member-header">
+                                <div class="member-avatar">MF</div>
+                                <h3>M. Fadil</h3>
+                            </div>
+                            <div class="member-details">
+                                <div class="detail-item">
+                                    <span class="detail-icon">📧</span>
+                                    <a href="mailto:m.fadil10504@gmail.com">m.fadil10504@gmail.com</a>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">📱</span>
+                                    <a href="tel:+6282177079475">+62 821-7707-9475</a>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">💻</span>
+                                    <a href="https://github.com/MuhammadFadil1504" target="_blank">GitHub</a>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">📷</span>
+                                    <a href="https://www.instagram.com/muhammad_fadil154" target="_blank">Instagram</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-member-card">
+                            <div class="member-header">
+                                <div class="member-avatar">TF</div>
+                                <h3>Trisha Fania</h3>
+                            </div>
+                            <div class="member-details">
+                                <div class="detail-item">
+                                    <span class="detail-icon">📧</span>
+                                    <a href="mailto:trishafania@gmail.com">trishafania@gmail.com</a>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">📱</span>
+                                    <a href="tel:+6282285645612">+62 822-8564-5612</a>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">💻</span>
+                                    <a href="https://github.com/trishafannia" target="_blank">GitHub</a>
+                                </div>
+                                <div class="detail-item">
+                                    <span class="detail-icon">📷</span>
+                                    <a href="https://www.instagram.com/trshfnn__" target="_blank">Instagram</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Contact Form -->
-                <div class="contact-form-section">
+                <div class="form-section">
                     <h2>Kirim Pesan</h2>
-                    <p>Halo, silakan kirim pesan Anda melalui formulir di bawah ini.</p>
+                    <p>Punya pertanyaan atau ingin memulai proyek? Isi formulir di bawah ini dan kami akan segera menghubungi Anda.</p>
                     
-                    <form id="contactForm" class="contact-form">
+                    <form class="contact-form" id="contactForm">
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Nama Lengkap <span class="required">*</span></label>
-                                <input type="text" id="name" name="name" placeholder="" required>
-                                <span class="error-message"></span>
+                                <input type="text" id="name" name="name" placeholder="Masukkan nama Anda" required>
                             </div>
-
                             <div class="form-group">
                                 <label for="email">Email <span class="required">*</span></label>
-                                <input type="email" id="email" name="email" placeholder="" required>
-                                <span class="error-message"></span>
+                                <input type="email" id="email" name="email" placeholder="your@email.com" required>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="phone">Nomor Telepon</label>
-                                <input type="tel" id="phone" name="phone" placeholder="">
-                                <span class="error-message"></span>
+                                <input type="tel" id="phone" name="phone" placeholder="+62 xxx-xxxx-xxxx">
                             </div>
-
                             <div class="form-group">
                                 <label for="subject">Subjek <span class="required">*</span></label>
-                                <input type="text" id="subject" name="subject" placeholder="" required>
-                                <span class="error-message"></span>
+                                <input type="text" id="subject" name="subject" placeholder="Tentang apa pesan Anda?" required>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="projectType">Jenis Projek</label>
+                            <label for="projectType">Jenis Proyek</label>
                             <select id="projectType" name="projectType">
-                                <option value="">Pilih jenis projek</option>
+                                <option value="">Pilih jenis proyek</option>
                                 <option value="website">Website Development</option>
                                 <option value="webapp">Web Application</option>
                                 <option value="mobile">Mobile App</option>
@@ -384,8 +900,8 @@
                         <div class="form-group">
                             <label for="budget">Kisaran Anggaran</label>
                             <select id="budget" name="budget">
-                                <option value="">pilih anggaran</option>
-                                <option value="small">$5,000</option>
+                                <option value="">Pilih anggaran</option>
+                                <option value="small">< $5,000</option>
                                 <option value="medium">$5,000 - $15,000</option>
                                 <option value="large">$15,000 - $50,000</option>
                                 <option value="enterprise">> $50,000</option>
@@ -395,14 +911,9 @@
                         <div class="form-group">
                             <label for="message">Pesan <span class="required">*</span></label>
                             <textarea id="message" name="message" rows="6" placeholder="Ceritakan tentang proyek Anda..." required></textarea>
-                            <span class="error-message"></span>
                         </div>
 
-                       
-
-                        <button type="submit" class="btn btn-primary btn-large">
-                            Kirim Pesan
-                        </button>
+                        <button type="submit" class="btn-submit">Kirim Pesan</button>
 
                         <div id="formSuccess" class="form-message success" style="display: none;">
                             ✓ Terima kasih! Pesan Anda telah berhasil dikirim. Saya akan segera menghubungi Anda.
@@ -414,46 +925,46 @@
                     </form>
                 </div>
             </div>
-
-            <!-- FAQ Section -->
-            <section class="faq-section">
-                <h2>Pertanyaan yang Sering Diajukan</h2>
-                <div class="faq-grid">
-                    <div class="faq-item">
-                        <h3>Layanan apa saja yang Anda tawarkan?</h3>
-                        <p>Saya berfokus pada pengembangan web, termasuk pengembangan frontend dan backend, desain UI/UX, serta pembuatan situs web responsif. Saya juga menawarkan layanan konsultasi untuk proyek teknis.</p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>Berapa lama waktu yang dibutuhkan untuk proyek biasa?</h3>
-                        <p>Waktu penyelesaian proyek bervariasi tergantung pada cakupan dan kompleksitasnya. Situs web sederhana bisa memakan waktu 2-4 minggu, sedangkan aplikasi web kompleks bisa memakan waktu 2-3 bulan atau lebih. Saya akan memberikan timeline yang rinci setelah membahas kebutuhan Anda.</p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>Apakah Anda bekerja dengan klien secara remote?</h3>
-                        <p>Ya! Saya bekerja dengan klien dari seluruh dunia. Saya berpengalaman dalam kolaborasi jarak jauh dan menggunakan alat seperti Slack, Zoom, dan perangkat lunak manajemen proyek untuk memastikan komunikasi yang lancar.</p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>Apakah Anda menyediakan dukungan berkelanjutan?</h3>
-                        <p>Saya mengikuti pendekatan agile: penemuan dan perencanaan, desain dan prototipe, pengembangan dan pengujian, peluncuran, serta dukungan berkelanjutan. Anda akan terlibat sepanjang proses dengan pembaruan berkala.</p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>Apakah Anda menyediakan dukungan berkelanjutan?</h3>
-                        <p>Saya mengikuti pendekatan agile: penemuan dan perencanaan, desain dan prototipe, pengembangan dan pengujian, peluncuran, serta dukungan berkelanjutan. Anda akan terlibat sepanjang proses dengan pembaruan berkala.</p>
-                    </div>
-
-                    <div class="faq-item">
-                        <h3>Bagaimana syarat pembayaran Anda?</h3>
-                        <p>Saya biasanya bekerja dengan pembayaran 50% awal untuk memulai proyek dan 50% setelah penyelesaian. Untuk proyek besar, kami dapat mengatur pembayaran berdasarkan tahapan. Metode pembayaran meliputi transfer bank dan PayPal.</p>
-                    </div>
-                </div>
-            </section>
-    
+        </div>
     </main>
 
-    <!-- Footer -->
+    <section class="faq-section">
+        <div class="container">
+            <h2>Pertanyaan yang Sering Diajukan</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3>Layanan apa saja yang Anda tawarkan?</h3>
+                    <p>Saya berfokus pada pengembangan web, termasuk pengembangan frontend dan backend, desain UI/UX, serta pembuatan situs web responsif. Saya juga menawarkan layanan konsultasi untuk proyek teknis.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Berapa lama waktu yang dibutuhkan untuk proyek biasa?</h3>
+                    <p>Waktu penyelesaian proyek bervariasi tergantung pada cakupan dan kompleksitasnya. Situs web sederhana bisa memakan waktu 2-4 minggu, sedangkan aplikasi web kompleks bisa memakan waktu 2-3 bulan atau lebih. Saya akan memberikan timeline yang rinci setelah membahas kebutuhan Anda.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Apakah Anda bekerja dengan klien secara remote?</h3>
+                    <p>Ya! Saya bekerja dengan klien dari seluruh dunia. Saya berpengalaman dalam kolaborasi jarak jauh dan menggunakan alat seperti Slack, Zoom, dan perangkat lunak manajemen proyek untuk memastikan komunikasi yang lancar.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Bagaimana proses kerja Anda?</h3>
+                    <p>Saya mengikuti pendekatan agile: penemuan dan perencanaan, desain dan prototipe, pengembangan dan pengujian, peluncuran, serta dukungan berkelanjutan. Anda akan terlibat sepanjang proses dengan pembaruan berkala.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Apakah Anda menyediakan dukungan berkelanjutan?</h3>
+                    <p>Ya, saya menawarkan paket pemeliharaan dan dukungan berkelanjutan untuk memastikan situs web atau aplikasi Anda tetap mutakhir, aman, dan berfungsi dengan lancar. Paket dapat disesuaikan dengan kebutuhan spesifik Anda.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>Bagaimana syarat pembayaran Anda?</h3>
+                    <p>Saya biasanya bekerja dengan pembayaran 50% awal untuk memulai proyek dan 50% setelah penyelesaian. Untuk proyek besar, kami dapat mengatur pembayaran berdasarkan tahapan. Metode pembayaran meliputi transfer bank dan PayPal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -476,22 +987,152 @@
                 <div class="footer-section">
                     <h3>Koneksi</h3>
                     <div class="social-links">
-                        <a href="https://github.com/MuhammadFadil1504/MuhammadFadil1504-Project-Kelompok-4-MK-Pengembangan-Perangkat-Lunak-Open-Source.git" target="_blank" rel="noopener noreferrer">GitHub</a>
+                        <a href="https://github.com/MuhammadFadil1504" target="_blank" rel="noopener noreferrer">GitHub</a>
                         <a href="https://www.instagram.com/afriadiikhn09" target="_blank" rel="noopener noreferrer">Instagram</a>
-                        
+                        <a href="mailto:afriadiikhwan9@gmail.com">Email</a>
                     </div>
                 </div>
             </div>
             
             <div class="footer-bottom">
                 <p>&copy; 2025 Digital Groups. Semua hak dilindungi.</p>
+                <p>Dibuat dengan ❤️ dan ☕</p>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript Files -->
-    <script src="../assets/js/navigation.js"></script>
-    <script src="../assets/js/form-validation.js"></script>
-    <script src="../assets/js/main.js"></script>
+    <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            
+            const spans = hamburger.querySelectorAll('span');
+            if (navMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.pageYOffset > 100) {
+                navbar.style.boxShadow = '0 4px 20px var(--shadow-md)';
+            } else {
+                navbar.style.boxShadow = '0 2px 10px var(--shadow)';
+            }
+        });
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        const formSuccess = document.getElementById('formSuccess');
+        const formError = document.getElementById('formError');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulate form submission
+            const formData = new FormData(contactForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const subject = formData.get('subject');
+            const message = formData.get('message');
+
+            // Basic validation
+            if (!name || !email || !subject || !message) {
+                formError.style.display = 'block';
+                formSuccess.style.display = 'none';
+                setTimeout(() => {
+                    formError.style.display = 'none';
+                }, 5000);
+                return;
+            }
+
+            // Show success message
+            formSuccess.style.display = 'block';
+            formError.style.display = 'none';
+            contactForm.reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                formSuccess.style.display = 'none';
+            }, 5000);
+
+            // In real application, you would send this data to a server
+            console.log('Form submitted:', {
+                name,
+                email,
+                subject,
+                message,
+                phone: formData.get('phone'),
+                projectType: formData.get('projectType'),
+                budget: formData.get('budget')
+            });
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe FAQ items
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'all 0.6s ease';
+            observer.observe(item);
+        });
+
+        // Observe team cards
+        document.querySelectorAll('.team-member-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateX(-20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
